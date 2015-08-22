@@ -37,8 +37,9 @@ COMMON_GLOBAL_CFLAGS 				+= -DNO_SECURE_DISCARD
 
 # Architecture
 TARGET_ARCH 					:= arm
-TARGET_ARCH_VARIANT 				:= armv7-a-neon
+TARGET_ARCH_VARIANT 			:= armv7-a-neon
 TARGET_CPU_VARIANT 				:= cortex-a53
+TARGET_CPU_CORTEX_A53 			:= true
 TARGET_CPU_ABI 					:= armeabi-v7a
 TARGET_CPU_ABI2 				:= armeabi
 ARCH_ARM_HAVE_NEON				:= true
@@ -124,14 +125,11 @@ TARGET_USE_VENDOR_CAMERA_EXT                    := true
 USE_DEVICE_SPECIFIC_CAMERA                      := true
 USE_CAMERA_STUB 				:= true
 
-
 # Releasetools
 TARGET_RELEASETOOLS_EXTENSIONS                  := $(LOCAL_PATH)
 
-
 # Video
 TARGET_HAVE_SIGNED_VENUS_FW                     := true
-
 
 # FM
 TARGET_QCOM_NO_FM_FIRMWARE                      := true
@@ -180,10 +178,11 @@ BOARD_HOSTAPD_PRIVATE_LIB 			:= lib_driver_cmd_qcwcn
 BOARD_WLAN_DEVICE 			        := qcwcn
 BOARD_WPA_SUPPLICANT_DRIVER 			:= NL80211
 BOARD_WPA_SUPPLICANT_PRIVATE_LIB 	        := lib_driver_cmd_qcwcn
-TARGET_USES_QCOM_WCNSS_QMI 			:= true
-TARGET_USES_WCNSS_CTRL 			        := true
 WIFI_DRIVER_FW_PATH_AP 			        := "ap"
 WIFI_DRIVER_FW_PATH_STA 			:= "sta"
+TARGET_PROVIDES_WCNSS_QMI        := true
+TARGET_USES_QCOM_WCNSS_QMI 	 := true
+TARGET_USES_WCNSS_CTRL 		 := true 
 WPA_SUPPLICANT_VERSION 			        := VER_0_8_X
 WIFI_DRIVER_MODULE_PATH 			:= "/system/lib/modules/wlan.ko"
 WIFI_DRIVER_MODULE_NAME 			:= "wlan"
