@@ -123,6 +123,50 @@ BLUETOOTH_HCI_USE_MCT 				:= true
 # QCOM RTC
 BOARD_USES_QC_TIME_SERVICES 			:= true
 
+# Dexopt, only if we can fit that in
+ifneq ($(TARGET_TRANSPARENT_COMPRESSION_METHOD),)
+ifeq ($(HOST_OS),linux)
+    ifeq ($(TARGET_BUILD_VARIANT),user)
+        ifeq ($(WITH_DEXPREOPT),)
+            WITH_DEXPREOPT := true
+        endif
+    endif
+endif
+endif
+
+# Crypto
+TARGET_HW_DISK_ENCRYPTION := true
+
+# Fonts
+EXTENDED_FONT_FOOTPRINT := true
+
+# Lights
+TARGET_PROVIDES_LIBLIGHT := true
+
+#ODEX
+WITH_DEXPREOP := true
+
+# Video
+TARGET_HAVE_SIGNED_VENUS_FW := true
+
+
+# Wifi
+BOARD_HAS_QCOM_WLAN := true
+BOARD_HAS_QCOM_WLAN_SDK := true
+BOARD_HOSTAPD_DRIVER := NL80211
+BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_qcwcn
+BOARD_WLAN_DEVICE := qcwcn
+BOARD_WPA_SUPPLICANT_DRIVER := NL80211
+BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_qcwcn
+TARGET_USES_QCOM_WCNSS_QMI := true
+TARGET_USES_WCNSS_CTRL := true
+WIFI_DRIVER_FW_PATH_AP := "ap"
+WIFI_DRIVER_FW_PATH_STA := "sta"
+WPA_SUPPLICANT_VERSION := VER_0_8_X
+WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/wlan.ko"
+WIFI_DRIVER_MODULE_NAME := "wlan"
+
+
 # SELinux
 BOARD_SEPOLICY_DIRS += \
         device/samsung/fortuna3g/sepolicy
