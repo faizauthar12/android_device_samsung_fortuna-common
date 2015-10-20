@@ -44,6 +44,9 @@ ARCH_ARM_HAVE_VFP 				:= true
 ARCH_ARM_HAVE_TLS_REGISTER 			:= true
 WITH_DEXPREOPT 					:= true
 
+# Properties (reset them here, include more in device if needed)
+TARGET_SYSTEM_PROP := $(LOCAL_PATH)/system.prop
+
 # Power
 TARGET_POWERHAL_VARIANT 			:= qcom
 
@@ -78,6 +81,16 @@ BOARD_VOLD_MAX_PARTITIONS 			:= 28
 AUDIO_FEATURE_LOW_LATENCY_PRIMARY 		:= true
 BOARD_USES_ALSA_AUDIO 				:= true
 
+# Display
+MAX_EGL_CACHE_KEY_SIZE                          := 12*1024
+MAX_EGL_CACHE_SIZE                              := 2048*1024
+NUM_FRAMEBUFFER_SURFACE_BUFFERS                 := 3
+OVERRIDE_RS_DRIVER                              := libRSDriver_adreno.so
+TARGET_CONTINUOUS_SPLASH_ENABLED                := true
+TARGET_USES_C2D_COMPOSITION                     := true
+TARGET_USES_ION                                 := true
+USE_OPENGL_RENDERER                             := true
+
 # Recovery
 TARGET_RECOVERY_FSTAB 				:= $(LOCAL_PATH)/recovery/fstab.qcom
 TARGET_USERIMAGES_USE_EXT4 			:= true
@@ -100,19 +113,28 @@ BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE 		:= ext4
 # RIL
 BOARD_RIL_CLASS 				:= ../../../$(LOCAL_PATH)/ril/
 COMMON_GLOBAL_CFLAGS += -DRIL_SUPPORTS_SEEK
+TARGET_RIL_VARIANT                              := caf
+PROTOBUF_SUPPORTED                              := true
 
 # OTA override
 TARGET_OTA_ASSERT_DEVICE			:= fortuna3g,SM-G530H,SM-G530F,G530FZ,SM-G530AZ
 
 # Camera
-TARGET_USE_VENDOR_CAMERA_EXT := true
-USE_DEVICE_SPECIFIC_CAMERA := true
-
-#Camera
+TARGET_USE_VENDOR_CAMERA_EXT                    := true
+USE_DEVICE_SPECIFIC_CAMERA                      := true
 USE_CAMERA_STUB 				:= true
 
+
+# Releasetools
+TARGET_RELEASETOOLS_EXTENSIONS                  := $(LOCAL_PATH)
+
+
+# Video
+TARGET_HAVE_SIGNED_VENUS_FW                     := true
+
+
 # FM
-TARGET_QCOM_NO_FM_FIRMWARE := true
+TARGET_QCOM_NO_FM_FIRMWARE                      := true
 
 # Bluetooth
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR 	:= $(DEVICE_PATH)/bluetooth
@@ -169,7 +191,6 @@ WIFI_DRIVER_FW_PATH_STA 			:= "sta"
 WPA_SUPPLICANT_VERSION 			        := VER_0_8_X
 WIFI_DRIVER_MODULE_PATH 			:= "/system/lib/modules/wlan.ko"
 WIFI_DRIVER_MODULE_NAME 			:= "wlan"
-
 
 # SELinux
 BOARD_SEPOLICY_DIRS += \
