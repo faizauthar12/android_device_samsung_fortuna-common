@@ -64,6 +64,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/recovery/init.qcom.rc:root/init.qcom.rc \
     $(LOCAL_PATH)/recovery/init.qcom.usb.rc:root/init.qcom.usb.rc \
     $(LOCAL_PATH)/recovery/init.target.rc:root/init.target.rc \
+    $(LOCAL_PATH)/recovery/init.class_main.sh:root/init.class_main.sh \
     $(LOCAL_PATH)/recovery/ueventd.qcom.rc:root/ueventd.qcom.rc
 
 # For userdebug builds
