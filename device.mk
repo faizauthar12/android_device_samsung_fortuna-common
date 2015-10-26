@@ -73,7 +73,7 @@ ADDITIONAL_DEFAULT_PROPERTIES += \
     ro.adb.secure=0 \
     ro.debuggable=1 \
     ro.multisim.simslotcount=2 \
-    persist.radio.multisim.config=dsds \
+    persist.radio.multisim.config=none \
     persist.service.adb.enable=1
 
 # Display
