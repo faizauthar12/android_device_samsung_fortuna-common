@@ -113,8 +113,6 @@ BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE 		:= ext4
 # RIL
 BOARD_RIL_CLASS 				:= ../../../$(LOCAL_PATH)/ril/
 COMMON_GLOBAL_CFLAGS += -DRIL_SUPPORTS_SEEK
-TARGET_RIL_VARIANT                              := caf
-PROTOBUF_SUPPORTED                              := true
 
 # OTA override
 TARGET_OTA_ASSERT_DEVICE			:= fortuna3g,SM-G530H,SM-G530F,G530FZ,SM-G530AZ
