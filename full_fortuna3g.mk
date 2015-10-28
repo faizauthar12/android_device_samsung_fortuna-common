@@ -25,3 +25,5 @@ PRODUCT_DEVICE := g530h
 PRODUCT_BRAND := samsung
 PRODUCT_MANUFACTURER := samsung
 PRODUCT_MODEL := SM-G530H
+
+$(call inherit-product-if-exists, vendor/samsung/fortuna3g/fortuna-common-vendor.mk)
