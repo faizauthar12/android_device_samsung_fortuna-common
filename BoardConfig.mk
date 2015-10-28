@@ -23,10 +23,12 @@ LOCAL_PATH 					:= device/samsung/fortuna3g
 -include vendor/samsung/fortuna3g/BoardConfigVendor.mk
 
 # Platform
-TARGET_BOARD_PLATFORM 				:= MSM8916
+TARGET_BOARD_PLATFORM 				:= msm8916
 TARGET_BOOTLOADER_BOARD_NAME 			:= msm8916
-TARGET_BOARD_PLATFORM_GPU 			:= Adreno-306
+TARGET_BOARD_PLATFORM_GPU 			:= qcom-adreno306
 TARGET_USE_QCOM_BIONIC_OPTIMIZATION 		:= true
+TARGET_USES_QCOM_BSP 				:= true
+COMMON_GLOBAL_CFLAGS 				+= -DQCOM_BSP
 
 # Flags
 TARGET_GLOBAL_CFLAGS 				+= -mfpu=neon -mfloat-abi=softfp
