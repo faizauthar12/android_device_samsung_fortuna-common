@@ -24,15 +24,14 @@ PRODUCT_AAPT_PREF_CONFIG := hdpi
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 
+# Basic
 PRODUCT_PACKAGES += \
-	com.android.future.usb.accessory \
 	libnetcmdiface \
 	Stk \
 	Stk2 \
 	static_busybox \
-	make_ext4fs \
-	setup_fs
-	
+
+# Permissions	
 PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.audio.low_latency.xml:system/etc/permissions/android.hardware.audio.low_latency.xml \
 	frameworks/native/data/etc/android.hardware.camera.autofocus.xml:system/etc/permissions/android.hardware.camera.autofocus.xml \
@@ -57,8 +56,18 @@ PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.software.sip.xml:system/etc/permissions/android.software.sip.xml \
 	frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
 	frameworks/native/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml
-# Ramdisk
 
+# Audio
+PRODUCT_PACKAGES += \
+    audiod \
+    audio.a2dp.default \
+    audio.primary.msm8916 \
+    audio.r_submix.default \
+    audio.usb.default \
+    audio_policy.msm8916 \
+    tinymix
+    
+# Ramdisk
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/recovery/fstab.qcom:root/fstab.qcom \
     $(LOCAL_PATH)/recovery/init.qcom.rc:root/init.qcom.rc \
@@ -67,11 +76,19 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/recovery/init.class_main.sh:root/init.class_main.sh \
     $(LOCAL_PATH)/recovery/ueventd.qcom.rc:root/ueventd.qcom.rc
 
+# Display
+PRODUCT_PACKAGES += \
+    copybit.msm8916 \
+    gralloc.msm8916 \
+    hwcomposer.msm8916 \
+    libtinyxml \
+    memtrack.msm8916 \
 
 # Filesystem
 PRODUCT_PACKAGES += \
     e2fsck \
     make_ext4fs
+    setup_fs
 
 # FM
 PRODUCT_PACKAGES += \
@@ -98,6 +115,7 @@ PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_video_le.xml:system/etc/media_codecs_google_video_le.xml \
     $(LOCAL_PATH)/configs/media_codecs.xml:system/etc/media_codecs.xml
+    $(LOCAL_PATH)/configs/media_profiles.xml:system/etc/media_profiles.xml
 
 PRODUCT_PACKAGES += \
     libdashplayer \
@@ -146,18 +164,6 @@ PRODUCT_PACKAGES += \
 # USB
 PRODUCT_PACKAGES += \
     com.android.future.usb.accessory
-
-
-
-# Display
-PRODUCT_PACKAGES += \
-    copybit.msm8916 \
-    gralloc.msm8916 \
-    hwcomposer.msm8916 \
-    libtinyxml \
-    memtrack.msm8916 \
-    $(LOCAL_PATH)/media/media_codecs.xml:system/etc/media_codecs.xml \
-    $(LOCAL_PATH)/media/media_profiles.xml:system/etc/media_profiles.xml
 
 # Boot animation
 TARGET_SCREEN_HEIGHT := 960
