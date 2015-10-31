@@ -37,9 +37,9 @@ COMMON_GLOBAL_CFLAGS 				+= -DNO_SECURE_DISCARD
 
 # Architecture
 TARGET_ARCH 					:= arm
-TARGET_ARCH_VARIANT 			:= armv7-a-neon
+TARGET_ARCH_VARIANT 				:= armv7-a-neon
 TARGET_CPU_VARIANT 				:= cortex-a53
-TARGET_CPU_CORTEX_A53 			:= true
+TARGET_CPU_CORTEX_A53 				:= true
 TARGET_CPU_ABI 					:= armeabi-v7a
 TARGET_CPU_ABI2 				:= armeabi
 ARCH_ARM_HAVE_NEON				:= true
@@ -48,7 +48,7 @@ ARCH_ARM_HAVE_TLS_REGISTER 			:= true
 WITH_DEXPREOPT 					:= true
 
 # Properties (reset them here, include more in device if needed)
-TARGET_SYSTEM_PROP := $(LOCAL_PATH)/system.prop
+TARGET_SYSTEM_PROP 				:= $(LOCAL_PATH)/system.prop
 
 # Power
 TARGET_POWERHAL_VARIANT 			:= qcom
@@ -180,9 +180,9 @@ BOARD_WPA_SUPPLICANT_DRIVER 			:= NL80211
 BOARD_WPA_SUPPLICANT_PRIVATE_LIB 	        := lib_driver_cmd_qcwcn
 WIFI_DRIVER_FW_PATH_AP 			        := "ap"
 WIFI_DRIVER_FW_PATH_STA 			:= "sta"
-TARGET_PROVIDES_WCNSS_QMI        := true
-TARGET_USES_QCOM_WCNSS_QMI 	 := true
-TARGET_USES_WCNSS_CTRL 		 := true 
+TARGET_PROVIDES_WCNSS_QMI        		:= true
+TARGET_USES_QCOM_WCNSS_QMI 	 		:= true
+TARGET_USES_WCNSS_CTRL 		 		:= true 
 WPA_SUPPLICANT_VERSION 			        := VER_0_8_X
 WIFI_DRIVER_MODULE_PATH 			:= "/system/lib/modules/wlan.ko"
 WIFI_DRIVER_MODULE_NAME 			:= "wlan"
@@ -196,4 +196,4 @@ BOARD_SEPOLICY_UNION += \
 	file_contexts \
 	sepolicy.te
 	
-TARGET_LDPRELOAD := libNimsWrap.so
+TARGET_LDPRELOAD 				:= libNimsWrap.so
