@@ -83,6 +83,7 @@ BOARD_VOLD_MAX_PARTITIONS 			:= 28
 # Audio
 AUDIO_FEATURE_LOW_LATENCY_PRIMARY 		:= true
 BOARD_USES_ALSA_AUDIO 				:= true
+TARGET_QCOM_AUDIO_VARIANT 			:= caf
 
 # Display
 MAX_EGL_CACHE_KEY_SIZE                          := 12*1024
