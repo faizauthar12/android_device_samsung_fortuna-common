@@ -118,7 +118,13 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/recovery/init.qcom.usb.rc:root/init.qcom.usb.rc \
     $(LOCAL_PATH)/recovery/init.target.rc:root/init.target.rc \
     $(LOCAL_PATH)/recovery/init.class_main.sh:root/init.class_main.sh \
-    $(LOCAL_PATH)/recovery/ueventd.qcom.rc:root/ueventd.qcom.rc
+    $(LOCAL_PATH)/recovery/ueventd.qcom.rc:root/ueventd.qcom.rc \
+	$(LOCAL_PATH)/recovery/init.qcom.factory.sh:root/init.qcom.factory.sh
+
+	PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/init.crda.sh:system/etc/init.crda.sh \
+    $(LOCAL_PATH)/configs/init.qcom.modem_links.sh:system/etc/init.qcom.modem_links.sh \
+    $(LOCAL_PATH)/configs/init.qcom.post_boot.sh:system/etc/init.qcom.post_boot.sh
 
 # Display
 PRODUCT_PACKAGES += \
