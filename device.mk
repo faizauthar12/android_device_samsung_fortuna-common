@@ -31,6 +31,16 @@ PRODUCT_PACKAGES += \
 	Stk2 \
 	static_busybox \
 
+# DPM
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/dpm/fdMgr/fd.conf:system/etc/dpm/fdMgr/fd.conf
+
+# Logmask
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/logmask/default_diag_mask.cfg:system/etc/logmask/default_diag_mask.cfg \
+    $(LOCAL_PATH)/configs/logmask/dynamic_debug_mask.cfg:system/etc/logmask/dynamic_debug_mask.cfg \
+    $(LOCAL_PATH)/configs/logmask/qdss.cfg:system/etc/logmask/qdss.cfg
+
 # Permissions	
 PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.audio.low_latency.xml:system/etc/permissions/android.hardware.audio.low_latency.xml \
@@ -65,6 +75,10 @@ PRODUCT_PACKAGES += \
     audio.r_submix.default \
     audio.usb.default \
     audio_policy.msm8916 \
+    libaudio-resampler \
+    libqcompostprocbundle \
+    libqcomvisualizer \
+    libqcomvoiceprocessing \
     tinymix
 
 # Audio configuration
@@ -84,6 +98,11 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     charger \
     charger_res_images
+
+# QRNGD
+PRODUCT_PACKAGES += \
+    qrngd \
+    qrngp
 
 # CRDA
 PRODUCT_PACKAGES += \
@@ -208,4 +227,4 @@ $(call inherit-product-if-exists, vendor/samsung/fortuna3g/fortuna-common-vendor
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 $(call inherit-product, device/common/gps/gps_us_supl.mk)
-$(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
+$(call inherit-product, frameworks/native/build/phone-xhdpi-1024-dalvik-heap.mk)

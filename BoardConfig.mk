@@ -29,6 +29,7 @@ TARGET_BOARD_PLATFORM_GPU 			:= qcom-adreno306
 TARGET_USE_QCOM_BIONIC_OPTIMIZATION 		:= true
 TARGET_USES_QCOM_BSP 				:= true
 COMMON_GLOBAL_CFLAGS 				+= -DQCOM_BSP
+HAVE_SYNAPTICS_I2C_RMI4_FW_UPGRADE := true
 
 # Flags
 TARGET_GLOBAL_CFLAGS 				+= -mfpu=neon -mfloat-abi=softfp
@@ -53,10 +54,10 @@ TARGET_SYSTEM_PROP 				:= $(LOCAL_PATH)/system.prop
 # Power
 TARGET_POWERHAL_VARIANT 			:= qcom
 
-# caf-new 
-TARGET_QCOM_DISPLAY_VARIANT 			:= caf-new
+# Media 
 TARGET_ENABLE_QC_AV_ENHANCEMENTS 		:= true
 TARGET_QCOM_MEDIA_VARIANT 			:= caf-new
+TARGET_HAVE_OMX_HEVC 				:= true
 
 # Kernel
 BOARD_CUSTOM_BOOTIMG_MK 			:= $(LOCAL_PATH)/mkbootimg.mk
@@ -81,18 +82,21 @@ BOARD_SUPPRESS_EMMC_WIPE 			:= true
 BOARD_VOLD_MAX_PARTITIONS 			:= 28
 
 # Audio
-AUDIO_FEATURE_LOW_LATENCY_PRIMARY 		:= true
 BOARD_USES_ALSA_AUDIO 				:= true
 TARGET_QCOM_AUDIO_VARIANT 			:= caf
 
 # Display
+TARGET_QCOM_DISPLAY_VARIANT 					:= caf-new
+TARGET_USES_ION                                 := true
+TARGET_USES_NEW_ION_API 						:= true
+TARGET_HAVE_HDMI_OUT 							:= false
+TARGET_USES_OVERLAY 							:= true
+TARGET_USES_C2D_COMPOSITION                     := true
+NUM_FRAMEBUFFER_SURFACE_BUFFERS                 := 3
+TARGET_HARDWARE_3D							:= false
+OVERRIDE_RS_DRIVER                              := libRSDriver_adreno.so
 MAX_EGL_CACHE_KEY_SIZE                          := 12*1024
 MAX_EGL_CACHE_SIZE                              := 2048*1024
-NUM_FRAMEBUFFER_SURFACE_BUFFERS                 := 3
-OVERRIDE_RS_DRIVER                              := libRSDriver_adreno.so
-TARGET_CONTINUOUS_SPLASH_ENABLED                := true
-TARGET_USES_C2D_COMPOSITION                     := true
-TARGET_USES_ION                                 := true
 USE_OPENGL_RENDERER                             := true
 
 # Recovery
