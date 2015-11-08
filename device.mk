@@ -104,6 +104,10 @@ PRODUCT_PACKAGES += \
     qrngd \
     qrngp
 
+# Bson
+PRODUCT_PACKAGES += \
+    libbson
+
 # CRDA
 PRODUCT_PACKAGES += \
     crda \
