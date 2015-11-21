@@ -56,7 +56,7 @@ TARGET_POWERHAL_VARIANT 			:= qcom
 
 # Media 
 TARGET_ENABLE_QC_AV_ENHANCEMENTS 		:= true
-TARGET_QCOM_MEDIA_VARIANT 			:= caf-new
+TARGET_QCOM_MEDIA_VARIANT 			:= caf-k30t
 TARGET_HAVE_OMX_HEVC 				:= true
 
 # Kernel
@@ -86,14 +86,14 @@ BOARD_USES_ALSA_AUDIO 				:= true
 TARGET_QCOM_AUDIO_VARIANT 			:= caf
 
 # Display
-TARGET_QCOM_DISPLAY_VARIANT 					:= caf-new
+TARGET_QCOM_DISPLAY_VARIANT 			:= caf-k30t
 TARGET_USES_ION                                 := true
-TARGET_USES_NEW_ION_API 						:= true
-TARGET_HAVE_HDMI_OUT 							:= false
-TARGET_USES_OVERLAY 							:= true
+TARGET_USES_NEW_ION_API 			:= true
+TARGET_HAVE_HDMI_OUT 				:= false
+TARGET_USES_OVERLAY 				:= true
 TARGET_USES_C2D_COMPOSITION                     := true
 NUM_FRAMEBUFFER_SURFACE_BUFFERS                 := 3
-TARGET_HARDWARE_3D							:= false
+TARGET_HARDWARE_3D				:= false
 OVERRIDE_RS_DRIVER                              := libRSDriver_adreno.so
 MAX_EGL_CACHE_KEY_SIZE                          := 12*1024
 MAX_EGL_CACHE_SIZE                              := 2048*1024
@@ -121,6 +121,7 @@ BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE 		:= ext4
 # RIL
 BOARD_RIL_CLASS 				:= ../../../$(LOCAL_PATH)/ril/
 COMMON_GLOBAL_CFLAGS += -DRIL_SUPPORTS_SEEK
+PROTOBUF_SUPPORTED := true
 
 # OTA override
 TARGET_OTA_ASSERT_DEVICE			:= fortuna3g,SM-G530H,SM-G530F,G530FZ,SM-G530AZ
@@ -148,17 +149,6 @@ BLUETOOTH_HCI_USE_MCT 				:= true
 # QCOM RTC
 BOARD_USES_QC_TIME_SERVICES 			:= true
 
-# Dexopt, only if we can fit that in
-ifneq ($(TARGET_TRANSPARENT_COMPRESSION_METHOD),)
-ifeq ($(HOST_OS),linux)
-    ifeq ($(TARGET_BUILD_VARIANT),user)
-        ifeq ($(WITH_DEXPREOPT),)
-            WITH_DEXPREOPT := true
-        endif
-    endif
-endif
-endif
-
 # Crypto
 TARGET_HW_DISK_ENCRYPTION 			:= true
 
@@ -167,9 +157,6 @@ EXTENDED_FONT_FOOTPRINT 			:= true
 
 # Lights
 TARGET_PROVIDES_LIBLIGHT 			:= true
-
-#ODEX
-WITH_DEXPREOP 			                := true
 
 # Video
 TARGET_HAVE_SIGNED_VENUS_FW 			:= true
@@ -185,7 +172,6 @@ BOARD_WPA_SUPPLICANT_DRIVER 			:= NL80211
 BOARD_WPA_SUPPLICANT_PRIVATE_LIB 	        := lib_driver_cmd_qcwcn
 WIFI_DRIVER_FW_PATH_AP 			        := "ap"
 WIFI_DRIVER_FW_PATH_STA 			:= "sta"
-TARGET_PROVIDES_WCNSS_QMI        		:= true
 TARGET_USES_QCOM_WCNSS_QMI 	 		:= true
 TARGET_USES_WCNSS_CTRL 		 		:= true 
 WPA_SUPPLICANT_VERSION 			        := VER_0_8_X

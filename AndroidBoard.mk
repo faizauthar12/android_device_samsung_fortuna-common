@@ -1,4 +1,5 @@
-# Copyright (C) 2015 The CyanogenMod Project
+#
+# Copyright (C) 2014 The CyanogenMod Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -11,18 +12,16 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+#
 
-LOCAL_PATH:= $(call my-dir)
+LOCAL_PATH := $(call my-dir)
+
 include $(CLEAR_VARS)
 
-LOCAL_SRC_FILES := wcnss_qmi_client.c
 
-LOCAL_C_INCLUDES += hardware/qcom/wlan/wcnss_service
-LOCAL_CFLAGS += -Wall
-
-LOCAL_SHARED_LIBRARIES := libc libcutils libutils liblog
-
-LOCAL_MODULE_TAGS := optional
-LOCAL_MODULE := libwcnss_qmi
-
-include $(BUILD_SHARED_LIBRARY)
+#Create symbolic links
+$(shell mkdir -p $(TARGET_OUT_ETC)/firmware/wlan/prima; \
+        ln -sf /data/misc/wifi/WCNSS_qcom_cfg.ini \
+        $(TARGET_OUT_ETC)/firmware/wlan/prima/WCNSS_qcom_cfg.ini; \
+        ln -sf /persist/WCNSS_qcom_wlan_nv.bin \
+        $(TARGET_OUT_ETC)/firmware/wlan/prima/WCNSS_qcom_wlan_nv.bin)

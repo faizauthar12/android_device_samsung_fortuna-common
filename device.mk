@@ -123,20 +123,30 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/recovery/init.target.rc:root/init.target.rc \
     $(LOCAL_PATH)/recovery/init.class_main.sh:root/init.class_main.sh \
     $(LOCAL_PATH)/recovery/ueventd.qcom.rc:root/ueventd.qcom.rc \
-	$(LOCAL_PATH)/recovery/init.qcom.factory.sh:root/init.qcom.factory.sh
+    $(LOCAL_PATH)/recovery/init.qcom.factory.sh:root/init.qcom.factory.sh
 
-	PRODUCT_COPY_FILES += \
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/hcidump.sh:system/etc/hcidump.sh \
+    $(LOCAL_PATH)/configs/hsic.control.bt.sh:system/etc/hsic.control.bt.sh \
+    $(LOCAL_PATH)/configs/init.ath3k.bt.sh:system/etc/init.ath3k.bt.sh \
     $(LOCAL_PATH)/configs/init.crda.sh:system/etc/init.crda.sh \
+    $(LOCAL_PATH)/configs/init.qcom.bt.sh:system/etc/init.qcom.bt.sh \
     $(LOCAL_PATH)/configs/init.qcom.modem_links.sh:system/etc/init.qcom.modem_links.sh \
-    $(LOCAL_PATH)/configs/init.qcom.post_boot.sh:system/etc/init.qcom.post_boot.sh
+    $(LOCAL_PATH)/configs/init.qcom.post_boot.sh:system/etc/init.qcom.post_boot.sh \
+    $(LOCAL_PATH)/configs/init.qcom.wifi.sh:system/etc/init.qcom.wifi.sh
 
 # Display
 PRODUCT_PACKAGES += \
     copybit.msm8916 \
     gralloc.msm8916 \
-    hwcomposer.msm8916 \
-    libtinyxml \
+    libmemalloc \
     memtrack.msm8916 \
+    hwcomposer.msm8916 \
+    liboverlay \
+    libgenlock \
+    libqdutils \
+    libqdMetaData \
+    libtinyxml
 
 # Filesystem
 PRODUCT_PACKAGES += \
@@ -174,13 +184,16 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/media/media_profiles.xml:system/etc/media_profiles.xml
 
 PRODUCT_PACKAGES += \
+    libc2dcolorconvert \
     libdashplayer \
+    libdivxdrmdecrypt \
+    libmm-omxcore \
     libOmxAacEnc \
     libOmxAmrEnc \
     libOmxCore \
     libOmxEvrcEnc \
     libOmxQcelp13Enc \
-    libOmxVenc \
+    libOmxVdec \
     libstagefrighthw \
     qcmediaplayer
 
@@ -190,7 +203,7 @@ ADDITIONAL_DEFAULT_PROPERTIES += \
     ro.adb.secure=0 \
     ro.debuggable=1 \
     ro.multisim.simslotcount=2 \
-    persist.radio.multisim.config=none \
+    persist.radio.multisim.config=dsds \
     persist.service.adb.enable=1
 
 # Thermal
@@ -210,9 +223,8 @@ PRODUCT_PACKAGES += \
     wcnss_service
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/wifi/WCNSS_qcom_cfg.ini:system/etc/firmware/wlan/prima/WCNSS_qcom_cfg.ini \
+    $(LOCAL_PATH)/wifi/WCNSS_qcom_cfg.ini:system/etc/wifi/WCNSS_qcom_cfg.ini \
     $(LOCAL_PATH)/wifi/WCNSS_cfg.dat:system/etc/firmware/wlan/prima/WCNSS_cfg.dat \
-    $(LOCAL_PATH)/wifi/WCNSS_qcom_wlan_nv.bin:system/etc/firmware/wlan/prima/WCNSS_qcom_wlan_nv.bin \
     $(LOCAL_PATH)/configs/hostapd.accept:system/etc/hostapd/hostapd.accept \
     $(LOCAL_PATH)/configs/hostapd.conf:system/etc/hostapd/hostapd_default.conf \
     $(LOCAL_PATH)/configs/hostapd.deny:system/etc/hostapd/hostapd.deny \
@@ -227,6 +239,9 @@ PRODUCT_PACKAGES += \
 # USB
 PRODUCT_PACKAGES += \
     com.android.future.usb.accessory
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.sf.lcd_density=240
 
 # Boot animation
 TARGET_SCREEN_HEIGHT := 960
