@@ -14,13 +14,13 @@
 # limitations under the License.
 
 # BoardConfig.mk
-LOCAL_PATH 					:= device/samsung/fortuna3g
+LOCAL_PATH 					:= device/samsung/fortunave3g
 
 # Inherit from samsung qcom-common
 -include device/samsung/qcom-common/BoardConfigCommon.mk 
 
 # inherit from the proprietary version
--include vendor/samsung/fortuna3g/BoardConfigVendor.mk
+-include vendor/samsung/fortunave3g/BoardConfigVendor.mk
 
 # Platform
 TARGET_BOARD_PLATFORM 				:= msm8916
@@ -124,7 +124,7 @@ COMMON_GLOBAL_CFLAGS += -DRIL_SUPPORTS_SEEK
 PROTOBUF_SUPPORTED := true
 
 # OTA override
-TARGET_OTA_ASSERT_DEVICE			:= fortuna3g,SM-G530H,SM-G530F,G530FZ,SM-G530AZ
+TARGET_OTA_ASSERT_DEVICE			:= fortuna3g,fortunave3g,SM-G530H,SM-G530F,G530FZ,SM-G530AZ
 
 # Camera
 TARGET_USE_VENDOR_CAMERA_EXT                    := true
@@ -180,7 +180,7 @@ WIFI_DRIVER_MODULE_NAME 			:= "wlan"
 
 # SELinux
 BOARD_SEPOLICY_DIRS += \
-        device/samsung/fortuna3g/sepolicy
+        device/samsung/fortunave3g/sepolicy
         
 BOARD_SEPOLICY_UNION += \
 	genfs_contexts \

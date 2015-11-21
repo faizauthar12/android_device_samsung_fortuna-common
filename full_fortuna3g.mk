@@ -12,18 +12,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-LOCAL_PATH := device/samsung/fortuna3g
+LOCAL_PATH := device/samsung/fortunave3g
 
 # Inherit from those products. Most specific first.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
 # Inherit from device.mk
-$(call inherit-product, device/samsung/fortuna3g/device.mk)
+$(call inherit-product, device/samsung/fortunave3g/device.mk)
 
-PRODUCT_NAME := fortuna3g
+PRODUCT_NAME := fortunave3g
 PRODUCT_DEVICE := g530h
 PRODUCT_BRAND := samsung
 PRODUCT_MANUFACTURER := samsung
 PRODUCT_MODEL := SM-G530H
 
-$(call inherit-product-if-exists, vendor/samsung/fortuna3g/fortuna-common-vendor.mk)
+$(call inherit-product-if-exists, vendor/samsung/fortunave3g/fortuna-common-vendor.mk)

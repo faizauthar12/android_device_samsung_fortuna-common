@@ -14,7 +14,7 @@
 
 LOCAL_PATH := $(call my-dir)
 
-ifeq ($(TARGET_BOOTLOADER_BOARD_NAME),fortuna3g)
+ifeq ($(TARGET_BOOTLOADER_BOARD_NAME),fortunave3g)
 include $(call all-makefiles-under,$(LOCAL_PATH))
 
 # CMNLIB

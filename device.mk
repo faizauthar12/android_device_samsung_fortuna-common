@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-LOCAL_PATH := device/samsung/fortuna3g
+LOCAL_PATH := device/samsung/fortunave3g
 
 # Overlay
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
@@ -247,7 +247,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 TARGET_SCREEN_HEIGHT := 960
 TARGET_SCREEN_WIDTH := 540
 
-$(call inherit-product-if-exists, vendor/samsung/fortuna3g/fortuna-common-vendor.mk)
+$(call inherit-product-if-exists, vendor/samsung/fortunave3g/fortuna-common-vendor.mk)
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)

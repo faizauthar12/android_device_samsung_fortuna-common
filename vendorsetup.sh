@@ -22,4 +22,4 @@
 #
 # 
 
-add_lunch_combo fortuna3g-userdebug
+add_lunch_combo fortunave3g-userdebug

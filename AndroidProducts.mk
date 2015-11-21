@@ -18,4 +18,4 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/full_fortuna3g.mk \
+    $(LOCAL_DIR)/full_fortunave3g.mk \
