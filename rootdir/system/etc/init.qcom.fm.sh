@@ -1,5 +1,5 @@
 #!/system/bin/sh
-# Copyright (c) 2012, The Linux Foundation. All rights reserved.
+# Copyright (c) 2009-2011, The Linux Foundation. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -26,10 +26,17 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-LOG_TAG="qcom-bluetooth"
-LOG_NAME="${0}:"
+setprop hw.fm.init 0
 
-hciattach_pid=""
+mode=`getprop hw.fm.mode`
+version=`getprop hw.fm.version`
+isAnalog=`getprop hw.fm.isAnalog`
+
+#find the transport type
+TRANSPORT=`getprop ro.qualcomm.bt.hci_transport`
+
+LOG_TAG="qcom-fm"
+LOG_NAME="${0}:"
 
 loge ()
 {
@@ -47,42 +54,53 @@ failed ()
   exit $2
 }
 
-start_hciattach ()
-{
-  /system/bin/hciattach -n /dev/ttyHS2 ath3k 3000000 &
-  hciattach_pid=$!
-  logi "start_hciattach: pid = $hciattach_pid"
-}
+logi "In FM shell Script"
+logi "mode: $mode"
+logi "isAnalog: $isAnalog"
+logi "Transport : $TRANSPORT"
+logi "Version : $version"
 
-kill_hciattach ()
-{
-  logi "kill_hciattach: pid = $hciattach_pid"
-  ## careful not to kill zero or null!
-  kill -TERM $hciattach_pid
-  # this shell doesn't exit now -- wait returns for normal exit
-}
+#$fm_qsoc_patches <fm_chipVersion> <enable/disable WCM>
+#
+case $mode in
+  "normal")
+    case $TRANSPORT in
+    "smd")
+        logi "inserting the radio transport module"
+        insmod /system/lib/modules/radio-iris-transport.ko
+     ;;
+     *)
+        logi "default transport case "
+     ;;
+    esac
+      /system/bin/fm_qsoc_patches $version 0
+     ;;
+  "wa_enable")
+   /system/bin/fm_qsoc_patches $version 1
+     ;;
+  "wa_disable")
+   /system/bin/fm_qsoc_patches $version 2
+     ;;
+  "config_dac")
+   /system/bin/fm_qsoc_patches $version 3 $isAnalog
+     ;;
+   *)
+    logi "Shell: Default case"
+    /system/bin/fm_qsoc_patches $version 0
+    ;;
+esac
 
-# mimic hciattach options parsing -- maybe a waste of effort
-USAGE="hciattach [-n] [-p] [-b] [-t timeout] [-s initial_speed] <tty> <type | id> [speed] [flow|noflow] [bdaddr]"
+exit_code_fm_qsoc_patches=$?
 
-while getopts "blnpt:s:" f
-do
-  case $f in
-  b | l | n | p)  opt_flags="$opt_flags -$f" ;;
-  t)      timeout=$OPTARG;;
-  s)      initial_speed=$OPTARG;;
-  \?)     echo $USAGE; exit 1;;
-  esac
-done
-shift $(($OPTIND-1))
+case $exit_code_fm_qsoc_patches in
+   0)
+	logi "FM QSoC calibration and firmware download succeeded"
+   ;;
+  *)
+	failed "FM QSoC firmware download and/or calibration failed" $exit_code_fm_qsoc_patches
+   ;;
+esac
 
-# init does SIGTERM on ctl.stop for service
-trap "kill_hciattach" TERM INT
-
-logi "start hciattach"
-start_hciattach
-
-wait $hciattach_pid
-logi "Bluetooth stopped"
+setprop hw.fm.init 1
 
 exit 0

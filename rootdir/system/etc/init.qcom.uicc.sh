@@ -1,5 +1,5 @@
 #!/system/bin/sh
-# Copyright (c) 2012, The Linux Foundation. All rights reserved.
+# Copyright (c) 2014, The Linux Foundation. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -26,63 +26,56 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-LOG_TAG="qcom-bluetooth"
-LOG_NAME="${0}:"
+target=`getprop ro.board.platform`
+action=`getprop usb_uicc.enabled`
 
-hciattach_pid=""
-
-loge ()
+uicc_insert()
 {
-  /system/bin/log -t $LOG_TAG -p e "$LOG_NAME $@"
+    case $target in
+    "msm8610"|"msm8916")
+        insmod /system/lib/modules/ice40-hcd.ko
+        ;;
+    "msm8226")
+        echo 1 > /sys/bus/platform/devices/msm_smsc_hub/enable
+        ;;
+    "msm8974")
+        echo msm_ehci_host > /sys/bus/platform/drivers/msm_ehci_host/bind
+        ;;
+    *)
+        echo "USB_UICC invalid target when insert uicc!"
+        ;;
+    esac
 }
 
-logi ()
+uicc_remove()
 {
-  /system/bin/log -t $LOG_TAG -p i "$LOG_NAME $@"
+    case $target in
+    "msm8610"|"msm8916")
+        rmmod /system/lib/modules/ice40-hcd.ko
+        ;;
+    "msm8226")
+        echo 0 > /sys/bus/platform/devices/msm_smsc_hub/enable
+        ;;
+    "msm8974")
+        echo msm_ehci_host > /sys/bus/platform/drivers/msm_ehci_host/unbind
+        ;;
+    *)
+        echo "USB_UICC invalid target when remove uicc!"
+        ;;
+    esac
 }
 
-failed ()
-{
-  loge "$1: exit code $2"
-  exit $2
-}
+case $action in
+"1")
+    uicc_insert
+    setprop usb_uicc.loading 1
+    ;;
+"0")
+    uicc_remove
+    setprop usb_uicc.loading 1
+    ;;
+*)
+    echo "USB_UICC invalid action for uicc operation!"
+    ;;
+esac
 
-start_hciattach ()
-{
-  /system/bin/hciattach -n /dev/ttyHS2 ath3k 3000000 &
-  hciattach_pid=$!
-  logi "start_hciattach: pid = $hciattach_pid"
-}
-
-kill_hciattach ()
-{
-  logi "kill_hciattach: pid = $hciattach_pid"
-  ## careful not to kill zero or null!
-  kill -TERM $hciattach_pid
-  # this shell doesn't exit now -- wait returns for normal exit
-}
-
-# mimic hciattach options parsing -- maybe a waste of effort
-USAGE="hciattach [-n] [-p] [-b] [-t timeout] [-s initial_speed] <tty> <type | id> [speed] [flow|noflow] [bdaddr]"
-
-while getopts "blnpt:s:" f
-do
-  case $f in
-  b | l | n | p)  opt_flags="$opt_flags -$f" ;;
-  t)      timeout=$OPTARG;;
-  s)      initial_speed=$OPTARG;;
-  \?)     echo $USAGE; exit 1;;
-  esac
-done
-shift $(($OPTIND-1))
-
-# init does SIGTERM on ctl.stop for service
-trap "kill_hciattach" TERM INT
-
-logi "start hciattach"
-start_hciattach
-
-wait $hciattach_pid
-logi "Bluetooth stopped"
-
-exit 0
