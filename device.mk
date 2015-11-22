@@ -33,13 +33,13 @@ PRODUCT_PACKAGES += \
 
 # DPM
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/dpm/fdMgr/fd.conf:system/etc/dpm/fdMgr/fd.conf
+    $(LOCAL_PATH)/rootdir/system/etc/dpm/fdMgr/fd.conf:system/etc/dpm/fdMgr/fd.conf
 
 # Logmask
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/logmask/default_diag_mask.cfg:system/etc/logmask/default_diag_mask.cfg \
-    $(LOCAL_PATH)/configs/logmask/dynamic_debug_mask.cfg:system/etc/logmask/dynamic_debug_mask.cfg \
-    $(LOCAL_PATH)/configs/logmask/qdss.cfg:system/etc/logmask/qdss.cfg
+    $(LOCAL_PATH)/rootdir/system/etc/logmask/default_diag_mask.cfg:system/etc/logmask/default_diag_mask.cfg \
+    $(LOCAL_PATH)/rootdir/system/etc/logmask/dynamic_debug_mask.cfg:system/etc/logmask/dynamic_debug_mask.cfg \
+    $(LOCAL_PATH)/rootdir/system/etc/logmask/qdss.cfg:system/etc/logmask/qdss.cfg
 
 # Permissions	
 PRODUCT_COPY_FILES += \
@@ -117,23 +117,23 @@ PRODUCT_PACKAGES += \
     
 # Ramdisk
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/recovery/fstab.qcom:root/fstab.qcom \
-    $(LOCAL_PATH)/recovery/init.qcom.rc:root/init.qcom.rc \
-    $(LOCAL_PATH)/recovery/init.qcom.usb.rc:root/init.qcom.usb.rc \
-    $(LOCAL_PATH)/recovery/init.target.rc:root/init.target.rc \
-    $(LOCAL_PATH)/recovery/init.class_main.sh:root/init.class_main.sh \
-    $(LOCAL_PATH)/recovery/ueventd.qcom.rc:root/ueventd.qcom.rc \
-    $(LOCAL_PATH)/recovery/init.qcom.factory.sh:root/init.qcom.factory.sh
+    $(LOCAL_PATH)/rootdir/fstab.qcom:root/fstab.qcom \
+    $(LOCAL_PATH)/rootdir/init.qcom.rc:root/init.qcom.rc \
+    $(LOCAL_PATH)/rootdir/init.qcom.usb.rc:root/init.qcom.usb.rc \
+    $(LOCAL_PATH)/rootdir/init.target.rc:root/init.target.rc \
+    $(LOCAL_PATH)/rootdir/init.class_main.sh:root/init.class_main.sh \
+    $(LOCAL_PATH)/rootdir/ueventd.qcom.rc:root/ueventd.qcom.rc \
+    $(LOCAL_PATH)/rootdir/init.qcom.factory.sh:root/init.qcom.factory.sh
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/hcidump.sh:system/etc/hcidump.sh \
-    $(LOCAL_PATH)/configs/hsic.control.bt.sh:system/etc/hsic.control.bt.sh \
-    $(LOCAL_PATH)/configs/init.ath3k.bt.sh:system/etc/init.ath3k.bt.sh \
-    $(LOCAL_PATH)/configs/init.crda.sh:system/etc/init.crda.sh \
-    $(LOCAL_PATH)/configs/init.qcom.bt.sh:system/etc/init.qcom.bt.sh \
-    $(LOCAL_PATH)/configs/init.qcom.modem_links.sh:system/etc/init.qcom.modem_links.sh \
-    $(LOCAL_PATH)/configs/init.qcom.post_boot.sh:system/etc/init.qcom.post_boot.sh \
-    $(LOCAL_PATH)/configs/init.qcom.wifi.sh:system/etc/init.qcom.wifi.sh
+    $(LOCAL_PATH)/rootdir/system/etc/hcidump.sh:system/etc/hcidump.sh \
+    $(LOCAL_PATH)/rootdir/system/etc/hsic.control.bt.sh:system/etc/hsic.control.bt.sh \
+    $(LOCAL_PATH)/rootdir/system/etc/init.ath3k.bt.sh:system/etc/init.ath3k.bt.sh \
+    $(LOCAL_PATH)/rootdir/system/etc/init.crda.sh:system/etc/init.crda.sh \
+    $(LOCAL_PATH)/rootdir/system/etc/init.qcom.bt.sh:system/etc/init.qcom.bt.sh \
+    $(LOCAL_PATH)/rootdir/system/etc/init.qcom.modem_links.sh:system/etc/init.qcom.modem_links.sh \
+    $(LOCAL_PATH)/rootdir/system/etc/init.qcom.post_boot.sh:system/etc/init.qcom.post_boot.sh \
+    $(LOCAL_PATH)/rootdir/system/etc/init.qcom.wifi.sh:system/etc/init.qcom.wifi.sh
 
 # Display
 PRODUCT_PACKAGES += \
@@ -167,7 +167,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # IRSC
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/sec_config:system/etc/sec_config
+    $(LOCAL_PATH)/rootdir/system/etc/sec_config:system/etc/sec_config
 
 # Keystore
 PRODUCT_PACKAGES += \
@@ -208,7 +208,7 @@ ADDITIONAL_DEFAULT_PROPERTIES += \
 
 # Thermal
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/thermal-engine-8916.conf:system/etc/thermal-engine-8916.conf
+    $(LOCAL_PATH)/rootdir/system/etc/thermal-engine-8916.conf:system/etc/thermal-engine-8916.conf
 
 # Wifi
 PRODUCT_PACKAGES += \
@@ -225,11 +225,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wifi/WCNSS_qcom_cfg.ini:system/etc/wifi/WCNSS_qcom_cfg.ini \
     $(LOCAL_PATH)/wifi/WCNSS_cfg.dat:system/etc/firmware/wlan/prima/WCNSS_cfg.dat \
-    $(LOCAL_PATH)/configs/hostapd.accept:system/etc/hostapd/hostapd.accept \
-    $(LOCAL_PATH)/configs/hostapd.conf:system/etc/hostapd/hostapd_default.conf \
-    $(LOCAL_PATH)/configs/hostapd.deny:system/etc/hostapd/hostapd.deny \
-    $(LOCAL_PATH)/configs/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf \
-    $(LOCAL_PATH)/configs/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf
+    $(LOCAL_PATH)/wifi/hostapd.accept:system/etc/hostapd/hostapd.accept \
+    $(LOCAL_PATH)/wifi/hostapd.conf:system/etc/hostapd/hostapd_default.conf \
+    $(LOCAL_PATH)/wifi/hostapd.deny:system/etc/hostapd/hostapd.deny \
+    $(LOCAL_PATH)/wifi/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf \
+    $(LOCAL_PATH)/wifi/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf
 
 
 # RIL

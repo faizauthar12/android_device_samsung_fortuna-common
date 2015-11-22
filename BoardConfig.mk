@@ -100,7 +100,7 @@ MAX_EGL_CACHE_SIZE                              := 2048*1024
 USE_OPENGL_RENDERER                             := true
 
 # Recovery
-TARGET_RECOVERY_FSTAB 				:= $(LOCAL_PATH)/recovery/fstab.qcom
+TARGET_RECOVERY_FSTAB 				:= $(LOCAL_PATH)/rootdir/fstab.qcom
 TARGET_USERIMAGES_USE_EXT4 			:= true
 BOARD_HAS_LARGE_FILESYSTEM			:= true
 TARGET_RECOVERY_DENSITY 			:= hdpi
