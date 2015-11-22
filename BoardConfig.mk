@@ -74,6 +74,13 @@ TARGET_KERNEL_SELINUX_CONFIG 			:= selinux_defconfig
 TARGET_KERNEL_TIMA_CONFIG 			:= tima8916_defconfig
 TARGET_KERNEL_VARIANT_CONFIG 			:= msm8916_sec_fortunave3g_eur_defconfig
 
+WLAN_MODULES:
+	mkdir -p $(KERNEL_MODULES_OUT)/pronto
+	mv $(KERNEL_MODULES_OUT)/wlan.ko $(KERNEL_MODULES_OUT)/pronto/pronto_wlan.ko
+	ln -sf /system/lib/modules/pronto/pronto_wlan.ko $(TARGET_OUT)/lib/modules/wlan.ko
+
+TARGET_KERNEL_MODULES += WLAN_MODULES
+
 # SD
 TARGET_USE_CUSTOM_LUN_FILE_PATH 		:= /sys/devices/platform/msm_hsusb/gadget/lun%d/file
 BOARD_VOLD_EMMC_SHARES_DEV_MAJOR 		:= true
