@@ -29,11 +29,23 @@ PRODUCT_PACKAGES += \
 	libnetcmdiface \
 	Stk \
 	Stk2 \
-	static_busybox \
+	static_busybox
 
 # DPM
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/system/etc/dpm/fdMgr/fd.conf:system/etc/dpm/fdMgr/fd.conf
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/rootdir/system/etc/whitelist_appops.xml:system/etc/whitelist_appops.xml
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/rootdir/system/etc/qlog-conf.xml:system/etc/qlog-conf.xml
+
+# GPS config
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/rootdir/system/etc/flp.conf:system/etc/flp.conf \
+    $(LOCAL_PATH)/rootdir/system/etc/gps.conf:system/etc/gps.conf \
+    $(LOCAL_PATH)/rootdir/system/etc/sap.conf:system/etc/sap.conf 
 
 # Logmask
 PRODUCT_COPY_FILES += \
@@ -252,6 +264,9 @@ PRODUCT_COPY_FILES += \
 # RIL
 PRODUCT_PACKAGES += \
     libxml2
+
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    persist.sys.whitelist=/system/etc/whitelist_appops.xml
 
 # USB
 PRODUCT_PACKAGES += \
