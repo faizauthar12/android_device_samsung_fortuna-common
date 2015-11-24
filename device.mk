@@ -235,7 +235,7 @@ ADDITIONAL_DEFAULT_PROPERTIES += \
 
 # Thermal
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/rootdir/system/etc/thermal-engine-8916.conf:system/etc/thermal-engine-8916.conf
+    $(LOCAL_PATH)/rootdir/system/etc/thermal-engine-8916.conf:system/etc/thermal-engine.conf
 
 # Wifi
 PRODUCT_PACKAGES += \
