@@ -34,7 +34,7 @@ on early-init
 
 on init
     # See storage config details at http://source.android.com/tech/storage/
-    mkdir /mnt/media_rw/extSdCard 0700 media_rw media_rw
+    #mkdir /mnt/media_rw/extSdCard 0700 media_rw media_rw
     #mkdir /mnt/media_rw/UsbDriveA 0700 media_rw media_rw
     #mkdir /mnt/media_rw/UsbDriveB 0700 media_rw media_rw
     #mkdir /mnt/media_rw/UsbDriveC 0700 media_rw media_rw
