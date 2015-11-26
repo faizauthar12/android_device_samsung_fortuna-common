@@ -12,6 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+ifeq ($(TARGET_DEVICE),fortunave3g)
+    include $(all-subdir-makefiles)
+endif
+
 LOCAL_PATH := $(call my-dir)
 
 ifeq ($(TARGET_BOOTLOADER_BOARD_NAME),fortunave3g)
