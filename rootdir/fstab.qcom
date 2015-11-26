@@ -11,5 +11,6 @@
 /dev/block/mmcblk0p17 	                        /recovery 	        emmc 	defaults defaults
 
 # VOLD
-/devices/soc.0/7864900.sdhci/mmc_host/mmc1      auto                    vfat    default     voldmanaged=extSdCard:auto,noemulatedsd
+/devices/soc.0/7864900.sdhci/mmc_host/mmc1	    auto 				            auto	  defaults		voldmanaged=sdcard1:auto,noemulatedsd
+
 
