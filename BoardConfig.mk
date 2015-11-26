@@ -165,10 +165,6 @@ EXTENDED_FONT_FOOTPRINT 			:= true
 # Lights
 TARGET_PROVIDES_LIBLIGHT 			:= true
 
-# Video
-TARGET_HAVE_SIGNED_VENUS_FW 			:= true
-
-
 # Wifi
 BOARD_HAS_QCOM_WLAN 			        := true
 BOARD_HAS_QCOM_WLAN_SDK 			:= true
