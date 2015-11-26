@@ -34,7 +34,7 @@ on early-init
 
 on init
     # See storage config details at http://source.android.com/tech/storage/
-    mkdir /mnt/media_rw/extSdCard 0700 media_rw media_rw
+    #mkdir /mnt/media_rw/extSdCard 0700 media_rw media_rw
     #mkdir /mnt/media_rw/UsbDriveA 0700 media_rw media_rw
     #mkdir /mnt/media_rw/UsbDriveB 0700 media_rw media_rw
     #mkdir /mnt/media_rw/UsbDriveC 0700 media_rw media_rw
@@ -54,16 +54,22 @@ on init
     # This is no longer supported from KK release.
     #export BOOTCLASSPATH ${BOOTCLASSPATH}:/system/framework/qcom.fmradio.jar
 
-    export SECONDARY_STORAGE /storage/extSdCard
-    mkdir /storage/extSdCard 0555 root root
+    #export SECONDARY_STORAGE /storage/extSdCard
+    #mkdir /storage/extSdCard 0555 root root
     # Support legacy paths
     symlink /storage/emulated/legacy /sdcard
     symlink /storage/emulated/legacy /mnt/sdcard
     symlink /storage/emulated/legacy /storage/sdcard0
     symlink /mnt/shell/emulated/0 /storage/emulated/legacy
+    
+    # Sdcard1
+    mkdir /storage/sdcard1 0775 system system
+    export SECONDARY_STORAGE /storage/sdcard1
+    mkdir /mnt/media_rw/sdcard1 0700 media_rw media_rw
+    mkdir /storage/sdcard1 0700 root root
 
     # map "real" external storages paths also in same way. backwards compatibility.
-    symlink /storage/extSdCard /mnt/extSdCard
+    #symlink /storage/extSdCard /mnt/extSdCard
     #symlink /storage/UsbDriveA /mnt/UsbDriveA
     #symlink /storage/UsbDriveB /mnt/UsbDriveB
     #symlink /storage/UsbDriveC /mnt/UsbDriveC
@@ -810,14 +816,20 @@ service profiler_daemon /system/bin/profiler_daemon
     disabled
 
 # virtual sdcard daemon running as media_rw (1023)
-service sdcard /system/bin/sdcard -u 1023 -g 1023 -l -r /data/media /mnt/shell/emulated
-    class late_start
-    oneshot
+#service sdcard /system/bin/sdcard -u 1023 -g 1023 -l -r /data/media /mnt/shell/emulated
+#    class late_start
+#    oneshot
+service sdcard /system/bin/sdcard -u 1023 -g 1023 -l /data/media /mnt/shell/emulated
+	class late_start
 
-service fuse_extSdCard /system/bin/sdcard -u 1023 -g 1023 -w 1023 -d -f /mnt/media_rw/extSdCard /storage/extSdCard
-    class late_start
-    disabled
-    oneshot
+#service fuse_extSdCard /system/bin/sdcard -u 1023 -g 1023 -w 1023 -d -f /mnt/media_rw/extSdCard /storage/extSdCard
+#    class late_start
+#    disabled
+#    oneshot
+
+service fuse_sdcard1 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/sdcard1 /storage/sdcard1
+	class late_start
+	disabled	
 
 service usb_uicc_enable /system/bin/sh /system/etc/init.qcom.uicc.sh
     class late_start
