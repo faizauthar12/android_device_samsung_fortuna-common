@@ -22,4 +22,6 @@
 #
 # 
 
-add_lunch_combo fortunave3g-userdebug
+for i in eng userdebug user; do
+	add_lunch_combo fortunave3g-${i}
+done
