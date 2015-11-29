@@ -164,7 +164,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/system/etc/init.qcom.sdio.sh:system/etc/init.qcom.sdio.sh \
     $(LOCAL_PATH)/rootdir/system/etc/init.qcom.uicc.sh:system/etc/init.qcom.uicc.sh \
     $(LOCAL_PATH)/rootdir/system/etc/init.qcom.wifi.sh:system/etc/init.qcom.wifi.sh
-
+    
+# libqdutils \
 # Display
 PRODUCT_PACKAGES += \
     copybit.msm8916 \
@@ -174,7 +175,6 @@ PRODUCT_PACKAGES += \
     hwcomposer.msm8916 \
     liboverlay \
     libgenlock \
-    libqdutils \
     libqdMetaData \
     libtinyxml
 
