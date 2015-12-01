@@ -81,6 +81,28 @@ WLAN_MODULES:
 
 TARGET_KERNEL_MODULES += WLAN_MODULES
 
+# Wifi
+BOARD_HAS_QCOM_WLAN 			        := true
+BOARD_HAS_QCOM_WLAN_SDK 			:= true
+BOARD_HOSTAPD_DRIVER 			        := NL80211
+BOARD_HOSTAPD_PRIVATE_LIB 			:= lib_driver_cmd_qcwcn
+BOARD_WLAN_DEVICE 			        := qcwcn
+BOARD_WPA_SUPPLICANT_DRIVER 			:= NL80211
+BOARD_WPA_SUPPLICANT_PRIVATE_LIB 	        := lib_driver_cmd_qcwcn
+WIFI_DRIVER_FW_PATH_AP 			        := "ap"
+WIFI_DRIVER_FW_PATH_STA 			:= "sta"
+TARGET_USES_QCOM_WCNSS_QMI 	 		:= true
+TARGET_USES_WCNSS_CTRL 		 		:= true 
+WPA_SUPPLICANT_VERSION 			        := VER_0_8_X
+WIFI_DRIVER_MODULE_PATH 			:= "/system/lib/modules/wlan.ko"
+WIFI_DRIVER_MODULE_NAME 			:= "wlan"
+
+# Bluetooth
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR 	:= $(LOCAL_PATH)/bluetooth
+BOARD_HAVE_BLUETOOTH 				:= true
+BOARD_HAVE_BLUETOOTH_QCOM 			:= true
+BLUETOOTH_HCI_USE_MCT 				:= true
+
 # SD
 TARGET_USE_CUSTOM_LUN_FILE_PATH 		:= /sys/devices/platform/msm_hsusb/gadget/lun%d/file
 BOARD_VOLD_EMMC_SHARES_DEV_MAJOR 		:= true
@@ -147,12 +169,6 @@ TARGET_HAVE_SIGNED_VENUS_FW                     := true
 # FM
 TARGET_QCOM_NO_FM_FIRMWARE                      := true
 
-# Bluetooth
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR 	:= $(LOCAL_PATH)/bluetooth
-BOARD_HAVE_BLUETOOTH 				:= true
-BOARD_HAVE_BLUETOOTH_QCOM 			:= true
-BLUETOOTH_HCI_USE_MCT 				:= true
-
 # QCOM RTC
 BOARD_USES_QC_TIME_SERVICES 			:= true
 
@@ -165,29 +181,23 @@ EXTENDED_FONT_FOOTPRINT 			:= true
 # Lights
 TARGET_PROVIDES_LIBLIGHT 			:= true
 
-# Wifi
-BOARD_HAS_QCOM_WLAN 			        := true
-BOARD_HAS_QCOM_WLAN_SDK 			:= true
-BOARD_HOSTAPD_DRIVER 			        := NL80211
-BOARD_HOSTAPD_PRIVATE_LIB 			:= lib_driver_cmd_qcwcn
-BOARD_WLAN_DEVICE 			        := qcwcn
-BOARD_WPA_SUPPLICANT_DRIVER 			:= NL80211
-BOARD_WPA_SUPPLICANT_PRIVATE_LIB 	        := lib_driver_cmd_qcwcn
-WIFI_DRIVER_FW_PATH_AP 			        := "ap"
-WIFI_DRIVER_FW_PATH_STA 			:= "sta"
-TARGET_USES_QCOM_WCNSS_QMI 	 		:= true
-TARGET_USES_WCNSS_CTRL 		 		:= true 
-WPA_SUPPLICANT_VERSION 			        := VER_0_8_X
-WIFI_DRIVER_MODULE_PATH 			:= "/system/lib/modules/wlan.ko"
-WIFI_DRIVER_MODULE_NAME 			:= "wlan"
+# Preload lib
+TARGET_LDPRELOAD 				:= libNimsWrap.so
 
 # SELinux
 BOARD_SEPOLICY_DIRS += \
         device/samsung/fortunave3g/sepolicy
         
 BOARD_SEPOLICY_UNION += \
-	genfs_contexts \
-	file_contexts \
-	sepolicy.te
-	
-TARGET_LDPRELOAD 				:= libNimsWrap.so
+    file.te \
+    device.te \
+    app.te \
+    cne.te \
+    qmux.te \
+    mpdecision.te \
+    thermald.te \
+    ueventd.te \
+    vold.te \
+    file_contexts \
+    genfs_contexts \
+    te_macros
