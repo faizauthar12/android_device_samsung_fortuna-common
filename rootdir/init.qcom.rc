@@ -60,6 +60,9 @@ on init
     mkdir /storage/sdcard1 0700 root root
     symlink /storage/sdcard1 /mnt/extSdCard
 
+# For RIL
+    mkdir /efs 0771 system radio
+    
 on fs
     mount_all fstab.qcom
     export SECONDARY_STORAGE /storage/extSdCard
@@ -418,6 +421,60 @@ on property:ro.multisim.simslotcount=2
     stop ril-daemon
     start ril-daemon
     start ril-daemon1
+
+on post-fs
+    # h2k permission
+    chmod 0644 /efs/redata.bin
+    chown radio radio /efs/h2k.dat
+    chmod 0644 /efs/h2k.dat
+    chown system system /efs/drm/h2k
+
+    #drm permission
+    mkdir /efs/drm 0774 drm system
+
+    # icd
+    check_icd
+    chown system system /dev/icd
+    chmod 0644 /dev/icd
+    chown system system /dev/icdr
+    chmod 0644 /dev/icdr
+    chown system system /dev/tzic
+
+    # DRK permission
+    mkdir /efs/prov 0770 radio system
+    chown radio system /efs/prov_data
+    chmod 0770 /efs/prov_data
+    chown radio system /efs/prov_data/dev_root
+    chmod 0770 /efs/prov_data/dev_root
+    chown radio system /efs/prov_data/dev_root/dev_root.dat
+    chmod 0640 /efs/prov_data/dev_root/dev_root.dat
+    chown radio system /efs/prov/libdevkm.lock
+    chmod 0660 /efs/prov/libdevkm.lock
+    rm /efs/prov/prov.b00
+    rm /efs/prov/prov.b01
+    rm /efs/prov/prov.b02
+    rm /efs/prov/prov.b03
+    rm /efs/prov/prov.mdt
+
+    # CS socket
+    mkdir /dev/socket/cs_socket 0770 system system
+
+    # MTP permission
+    chmod 0660 /dev/usb_mtp_gadget
+    chown system system /dev/usb_mtp_gadget
+    mkdir /dev/socket/mtp 0770 system mtp
+
+# [ SEC_MM_DRM
+    # DRM directory creation
+    mkdir /system/etc/security/.drm 0775
+    chown root root /system/etc/security/.drm
+    chmod 0775 /system/etc/security/.drm
+
+    # Added drm folder to copy drm plugins
+    mkdir /system/lib/drm 0775
+    chown root root /system/lib/drm
+    chmod 0775 /system/lib/drm
+# ]
 
 # msm specific files that need to be created on /data
 on post-fs-data
