@@ -40,9 +40,40 @@ on post-fs
 on fs
     mount_all fstab.qcom
 
+    # Keeping following partitions outside fstab file. As user may not have
+    # these partition flashed on the device. Failure to mount any partition in fstab file
+    # results in failure to launch late-start class.
+
+    wait /dev/block/mmcblk0p25
+    check_fs /dev/block/mmcblk0p25 ext4
+    mount ext4 /dev/block/mmcblk0p25 /cache nosuid nodev noatime noauto_da_alloc,discard,journal_async_commit,errors=panic
+
+    wait /dev/block/mmcblk0p22
+    check_fs /dev/block/mmcblk0p22 ext4
+    mount ext4 /dev/block/mmcblk0p22 /persist nosuid nodev noatime noauto_da_alloc,discard,journal_async_commit,errors=panic
+
+    wait /dev/block/mmcblk0p13
+    check_fs /dev/block/mmcblk0p13 ext4
+    mount ext4 /dev/block/mmcblk0p13 /efs nosuid nodev noatime noauto_da_alloc,discard,journal_async_commit,errors=panic
     chown system radio /efs
     chmod 0771 /efs
     restorecon -R /efs
+
+on fs_selinux
+    wait /dev/block/mmcblk0p1
+    mount vfat /dev/block/mmcblk0p1 /firmware ro shortname=lower,uid=1000,gid=1000,dmask=227,fmask=337,context=u:object_r:firmware:s0
+    
+    wait /dev/block/mmcblk0p2
+    mount vfat /dev/block/mmcblk0p2 /firmware-modem ro shortname=lower,uid=1000,gid=1000,dmask=227,fmask=337,context=u:object_r:firmware:s0
+    #write /sys/kernel/boot_adsp/boot 1
+
+on fs_selinux_disable
+    wait /dev/block/mmcblk0p1
+    mount vfat /dev/block/mmcblk0p1 /firmware ro shortname=lower,uid=1000,gid=1000,dmask=227,fmask=337
+    
+    wait /dev/block/mmcblk0p2
+    mount vfat /dev/block/mmcblk0p2 /firmware-modem ro shortname=lower,uid=1000,gid=1000,dmask=227,fmask=337
+    #write /sys/kernel/boot_adsp/boot 1
 
 on post-fs-data
     mkdir /data/tombstones 0771 system system
@@ -104,8 +135,8 @@ service audiod /system/bin/audiod
    group system
 
 on charger-fs
-   wait /dev/block/bootdevice/by-name/system
-   mount ext4 /dev/block/bootdevice/by-name/system /system ro barrier=1
+   wait /dev/block/mmcblk0p24
+   mount ext4 /dev/block/mmcblk0p24 /system ro barrier=1
    chown root system /sys/class/power_supply/bms/current_now
    chown root system /sys/class/power_supply/bms/voltage_ocv
    chmod 0664 /sys/class/power_supply/bms/current_now

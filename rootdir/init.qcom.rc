@@ -32,6 +32,8 @@ on early-init
     mount debugfs debugfs /sys/kernel/debug
     write /sys/block/mmcblk0/queue/scheduler noop
 
+    mkdir /efs 0771 system radio
+
 on init
     # Set permissions for persist partition
     mkdir /persist 0771 system system
@@ -39,35 +41,27 @@ on init
     mkdir /mnt/shell/emulated 0700 shell shell
     mkdir /storage/emulated 0555 root root
 
+    # External storage directories
+    mkdir /mnt/media_rw/sdcard0 0700 media_rw media_rw
+    mkdir /mnt/media_rw/sdcard1 0700 media_rw media_rw
+
+    mkdir /storage/sdcard0 0700 root root
+    mkdir /storage/sdcard1 0700 root root
+
     export EXTERNAL_STORAGE /storage/emulated/legacy
+    export SECONDARY_STORAGE /storage/sdcard1
     export EMULATED_STORAGE_SOURCE /mnt/shell/emulated
     export EMULATED_STORAGE_TARGET /storage/emulated
-    # This is no longer supported from KK release.
-    #export BOOTCLASSPATH ${BOOTCLASSPATH}:/system/framework/qcom.fmradio.jar
 
-    #export SECONDARY_STORAGE /storage/extSdCard
-    #mkdir /storage/extSdCard 0555 root root
     # Support legacy paths
     symlink /storage/emulated/legacy /sdcard
     symlink /storage/emulated/legacy /mnt/sdcard
     symlink /storage/emulated/legacy /storage/sdcard0
-    symlink /mnt/shell/emulated/0 /storage/emulated/legacy
-    
-    # Sdcard1
-    mkdir /storage/sdcard1 0775 system system
-    export SECONDARY_STORAGE /storage/sdcard1
-    mkdir /mnt/media_rw/sdcard1 0700 media_rw media_rw
-    mkdir /storage/sdcard1 0700 root root
+    symlink /storage/sdcard1 /extSdCard
     symlink /storage/sdcard1 /mnt/extSdCard
-
-# For RIL
-    mkdir /efs 0771 system radio
-    
-on fs
-    mount_all fstab.qcom
-    export SECONDARY_STORAGE /storage/extSdCard
-    mkdir /storage/extSdCard 0700 root root
-
+    symlink /storage/sdcard1 /external_sd
+    symlink /mnt/shell/emulated/0 /storage/emulated/legacy
+        
 on early-boot
     # set RLIMIT_MEMLOCK to 64MB
     setrlimit 8 67108864 67108864
