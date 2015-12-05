@@ -1,11 +1,11 @@
 # Android fstab file.
 #<src>                                          <mnt_point>             <type>  <mnt_flags and options>                                                                       <fs_mgr_flags>
-/dev/block/mmcblk0p24                           /system                 ext4    ro,errors=panic                                                                                wait
-/dev/block/mmcblk0p27                           /data                   ext4    nosuid,nodev,noatime,noauto_da_alloc,discard,journal_async_commit,errors=panic                 wait,check,encryptable=footer
-/dev/block/mmcblk0p16                           /boot                   emmc 	defaults                                                                                       defaults
-/dev/block/mmcblk0p17 	                        /recovery               emmc 	defaults                                                                                       defaults 
-/dev/block/mmcblk0p2                            /firmware-modem         vfat    ro,shortname=lower,uid=1000,gid=1000,dmask=227,fmask=337                                       wait
-/dev/block/mmcblk0p1                            /firmware               vfat    ro,shortname=lower,uid=1000,gid=1000,dmask=227,fmask=337                                       wait
+/dev/block/bootdevice/by-name/system                           /system                 ext4    ro,errors=panic                                                                                wait
+/dev/block/bootdevice/by-name/userdata                           /data                   ext4    nosuid,nodev,noatime,noauto_da_alloc,discard,journal_async_commit,errors=panic                 wait,check,encryptable=footer
+/dev/block/bootdevice/by-name/boot                           /boot                   emmc 	defaults                                                                                       defaults
+/dev/block/bootdevice/by-name/recovery 	                        /recovery               emmc 	defaults                                                                                       defaults 
+/dev/block/bootdevice/by-name/modem                            /firmware-modem         vfat    ro,shortname=lower,uid=1000,gid=1000,dmask=227,fmask=337                                       wait
+/dev/block/bootdevice/by-name/apnhlos                            /firmware               vfat    ro,shortname=lower,uid=1000,gid=1000,dmask=227,fmask=337                                       wait
 
 # VOLD
 /devices/soc.0/7864900.sdhci/mmc_host/mmc1	 auto 		        auto	 defaults                                                                                      voldmanaged=sdcard1:auto,noemulatedsd

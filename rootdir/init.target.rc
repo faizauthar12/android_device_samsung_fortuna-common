@@ -44,17 +44,17 @@ on fs
     # these partition flashed on the device. Failure to mount any partition in fstab file
     # results in failure to launch late-start class.
 
-    wait /dev/block/mmcblk0p25
-    check_fs /dev/block/mmcblk0p25 ext4
-    mount ext4 /dev/block/mmcblk0p25 /cache nosuid nodev noatime noauto_da_alloc,discard,journal_async_commit,errors=panic
+    wait /dev/block/bootdevice/by-name/cache
+    check_fs /dev/block/bootdevice/by-name/cache ext4
+    mount ext4 /dev/block/bootdevice/by-name/cache /cache nosuid nodev noatime noauto_da_alloc,discard,journal_async_commit,errors=panic
 
-    wait /dev/block/mmcblk0p22
-    check_fs /dev/block/mmcblk0p22 ext4
-    mount ext4 /dev/block/mmcblk0p22 /persist nosuid nodev noatime noauto_da_alloc,discard,journal_async_commit,errors=panic
+    wait /dev/block/bootdevice/by-name/persist
+    check_fs /dev/block/bootdevice/by-name/persist ext4
+    mount ext4 /dev/block/bootdevice/by-name/persist /persist nosuid nodev noatime noauto_da_alloc,discard,journal_async_commit,errors=panic
 
-    wait /dev/block/mmcblk0p13
-    check_fs /dev/block/mmcblk0p13 ext4
-    mount ext4 /dev/block/mmcblk0p13 /efs nosuid nodev noatime noauto_da_alloc,discard,journal_async_commit,errors=panic
+    wait /dev/block/bootdevice/by-name/efs
+    check_fs /dev/block/bootdevice/by-name/efs ext4
+    mount ext4 /dev/block/bootdevice/by-name/efs /efs nosuid nodev noatime noauto_da_alloc,discard,journal_async_commit,errors=panic
     chown system radio /efs
     chmod 0771 /efs
     restorecon -R /efs
@@ -119,8 +119,8 @@ service audiod /system/bin/audiod
    group system
 
 on charger-fs
-   wait /dev/block/mmcblk0p24
-   mount ext4 /dev/block/mmcblk0p24 /system ro barrier=1
+   wait /dev/block/bootdevice/by-name/system
+   mount ext4 /dev/block/bootdevice/by-name/system /system ro barrier=1
    chown root system /sys/class/power_supply/bms/current_now
    chown root system /sys/class/power_supply/bms/voltage_ocv
    chmod 0664 /sys/class/power_supply/bms/current_now
