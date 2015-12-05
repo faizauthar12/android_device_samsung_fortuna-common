@@ -8,4 +8,4 @@
 /dev/block/bootdevice/by-name/apnhlos                   /firmware               vfat    ro,shortname=lower,uid=1000,gid=1000,dmask=227,fmask=337                                       wait
 
 # VOLD
-/devices/soc.0/7864900.sdhci/mmc_host/mmc1	 auto 		                auto	 defaults                                                                                      voldmanaged=sdcard1:auto,noemulatedsd
+/devices/soc.0/7864900.sdhci/mmc_host/mmc1              auto                    auto    defaults                                                                                      voldmanaged=sdcard1:auto,noemulatedsd
