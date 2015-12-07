@@ -48,7 +48,6 @@ import android.telephony.SmsManager;
 import android.telephony.SmsMessage;
 import android.text.TextUtils;
 import android.util.SparseArray;
-import android.media.AudioManager;
 
 import com.android.internal.telephony.gsm.SmsBroadcastConfigInfo;
 import com.android.internal.telephony.gsm.SsData;
@@ -81,7 +80,7 @@ import java.util.Random;
 
 
 /**
- * RIL customization for Samsung A5/A3 devices
+ * RIL customization for Samsung Dual-sim devices
  *
  * {@hide}
  */
@@ -93,18 +92,14 @@ public class FortunaRIL extends RIL implements CommandsInterface {
     private static final int RIL_UNSOL_AM = 11010;
     private static final int RIL_UNSOL_WB_AMR_STATE = 11017;
     private static final int RIL_UNSOL_RESPONSE_HANDOVER = 11021;
-    private static final int RIL_UNSOL_ON_SS_G7102 = 1040;
-    private static final int RIL_UNSOL_STK_CC_ALPHA_NOTIFY_G7102 = 1041;
-    private static final int RIL_UNSOL_UICC_SUBSCRIPTION_STATUS_CHANGED_G7102 = 11031;
-
-    private AudioManager mAudioManager;
+    private static final int RIL_UNSOL_ON_SS_G800H = 1040;
+    private static final int RIL_UNSOL_STK_CC_ALPHA_NOTIFY_G800H = 1041;
+    private static final int RIL_UNSOL_UICC_SUBSCRIPTION_STATUS_CHANGED_G800H = 11031;
 
     public FortunaRIL(Context context, int networkMode, int cdmaSubscription,Integer instanceId) {
         super(context, networkMode, cdmaSubscription,  instanceId);
-        mAudioManager = (AudioManager)mContext.getSystemService(Context.AUDIO_SERVICE);
         mQANElements = 6;
     }
-
 
     @Override
     public void
@@ -118,9 +113,9 @@ public class FortunaRIL extends RIL implements CommandsInterface {
 
         rr.mParcel.writeString(address);
         rr.mParcel.writeInt(clirMode);
-        rr.mParcel.writeInt(0);         // CallDetails.call_type
-        rr.mParcel.writeInt(1);         // CallDetails.call_domain
-        rr.mParcel.writeString("");     // CallDetails.getCsvFromExtras
+        rr.mParcel.writeInt(0);     // CallDetails.call_type
+        rr.mParcel.writeInt(1);     // CallDetails.call_domain
+        rr.mParcel.writeString(""); // CallDetails.getCsvFromExtras
 
         if (uusInfo == null) {
             rr.mParcel.writeInt(0); // UUS information is absent
@@ -221,7 +216,7 @@ public class FortunaRIL extends RIL implements CommandsInterface {
             boolean isVideo = (0 != p.readInt());
             int call_type = p.readInt();            // Samsung CallDetails
             int call_domain = p.readInt();          // Samsung CallDetails
-            p.readInt();            // Samsung CallDetails
+            String csv = p.readString();            // Samsung CallDetails
             dc.isVoicePrivacy = (0 != p.readInt());
             dc.number = p.readString();
             int np = p.readInt();
@@ -271,6 +266,48 @@ public class FortunaRIL extends RIL implements CommandsInterface {
         }
 
         return response;
+    }
+
+    @Override
+    protected Object
+    responseSignalStrength(Parcel p) {
+        int gsmSignalStrength = (p.readInt() & 0xff00)/85;
+        int gsmBitErrorRate = p.readInt();
+        int cdmaDbm = p.readInt();
+        int cdmaEcio = p.readInt();
+        int evdoDbm = p.readInt();
+        int evdoEcio = p.readInt();
+        int evdoSnr = p.readInt();
+        int lteSignalStrength = p.readInt();
+        int lteRsrp = p.readInt();
+        int lteRsrq = p.readInt();
+        int lteRssnr = p.readInt();
+        int lteCqi = p.readInt();
+        int tdScdmaRscp = p.readInt();
+        // constructor sets default true, makeSignalStrengthFromRilParcel does not set it
+        boolean isGsm = true;
+
+        if ((lteSignalStrength & 0xff) == 255 || lteSignalStrength == 99) {
+            lteSignalStrength = 99;
+            lteRsrp = SignalStrength.INVALID;
+            lteRsrq = SignalStrength.INVALID;
+            lteRssnr = SignalStrength.INVALID;
+            lteCqi = SignalStrength.INVALID;
+        } else {
+            lteSignalStrength &= 0xff;
+        }
+
+        if (RILJ_LOGD)
+            riljLog("gsmSignalStrength:" + gsmSignalStrength + " gsmBitErrorRate:" + gsmBitErrorRate +
+                    " cdmaDbm:" + cdmaDbm + " cdmaEcio:" + cdmaEcio + " evdoDbm:" + evdoDbm +
+                    " evdoEcio: " + evdoEcio + " evdoSnr:" + evdoSnr +
+                    " lteSignalStrength:" + lteSignalStrength + " lteRsrp:" + lteRsrp +
+                    " lteRsrq:" + lteRsrq + " lteRssnr:" + lteRssnr + " lteCqi:" + lteCqi +
+                    " tdScdmaRscp:" + tdScdmaRscp + " isGsm:" + (isGsm ? "true" : "false"));
+
+        return new SignalStrength(gsmSignalStrength, gsmBitErrorRate, cdmaDbm, cdmaEcio, evdoDbm,
+                evdoEcio, evdoSnr, lteSignalStrength, lteRsrp, lteRsrq, lteRssnr, lteCqi,
+                tdScdmaRscp, isGsm);
     }
 
     @Override
@@ -366,11 +403,10 @@ public class FortunaRIL extends RIL implements CommandsInterface {
     @Override
     protected void
     processUnsolicited (Parcel p) {
-        Object ret = null;
+        Object ret;
         int dataPosition = p.dataPosition(); // save off position within the Parcel
         int response = p.readInt();
         int newResponse = response;
-        
         switch(response) {
             case RIL_UNSOL_RESPONSE_IMS_NETWORK_STATE_CHANGED:
                 ret = responseVoid(p);
@@ -383,7 +419,6 @@ public class FortunaRIL extends RIL implements CommandsInterface {
                 break;
             case RIL_UNSOL_WB_AMR_STATE:
                 ret = responseInts(p);
-                setWbAmr(((int[])ret)[0]);
                 break;
             case RIL_UNSOL_RESPONSE_HANDOVER:
                 ret = responseVoid(p);
@@ -397,31 +432,13 @@ public class FortunaRIL extends RIL implements CommandsInterface {
             case 11031:
                 newResponse = RIL_UNSOL_UICC_SUBSCRIPTION_STATUS_CHANGED;
                 break;
-             }
-
-        switch (response) {
-              case RIL_UNSOL_AM:
-                samsungUnsljLogRet(response, ret);
-                String amString = (String) ret;
-                Rlog.d(RILJ_LOG_TAG, "Executing AM: " + amString);
-
-                try {
-                    Runtime.getRuntime().exec("am " + amString);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    Rlog.e(RILJ_LOG_TAG, "am " + amString + " could not be executed.");
-                }
-                break;
-
-	    default:
-             if (newResponse != response) {
-                  p.setDataPosition(dataPosition);
-                  p.writeInt(newResponse);
-            }
-	        p.setDataPosition(dataPosition);
-    		super.processUnsolicited(p);
-    		return;
-	}
+        }
+        if (newResponse != response) {
+            p.setDataPosition(dataPosition);
+            p.writeInt(newResponse);
+        }
+        p.setDataPosition(dataPosition);
+        super.processUnsolicited(p);
     }
 
 
@@ -443,6 +460,42 @@ public class FortunaRIL extends RIL implements CommandsInterface {
         send(rr);
     }
 
+   @Override
+    public void setUiccSubscription(int slotId, int appIndex, int subId,
+            int subStatus, Message result) {
+        //Note: This RIL request is also valid for SIM and RUIM (ICC card)
+        RILRequest rr = RILRequest.obtain(115, result);
+
+        if (RILJ_LOGD) riljLog(rr.serialString() + "> " + requestToString(rr.mRequest)
+                + " slot: " + slotId + " appIndex: " + appIndex
+                + " subId: " + subId + " subStatus: " + subStatus);
+
+        rr.mParcel.writeInt(slotId);
+        rr.mParcel.writeInt(appIndex);
+        rr.mParcel.writeInt(subId);
+        rr.mParcel.writeInt(subStatus);
+
+        send(rr);
+    }
+
+   @Override
+    public void setDataAllowed(boolean allowed, Message result) {
+	int req = 123;
+        RILRequest rr;
+	if (allowed)
+        {
+            req = 116;
+            rr = RILRequest.obtain(req, result);
+        }
+        else
+        {
+            rr = RILRequest.obtain(req, result);
+            rr.mParcel.writeInt(1);
+            rr.mParcel.writeInt(allowed ? 1 : 0);
+        }
+        send(rr);
+    }
+
     private void logParcel(Parcel p) {
         StringBuffer s = new StringBuffer();
         byte [] bytes = p.marshall();
@@ -454,29 +507,4 @@ public class FortunaRIL extends RIL implements CommandsInterface {
         }
         riljLog("parcel position=" + p.dataPosition() + ": " + s);
     }
-
-    static String
-    samsungResponseToString(int request)
-    {
-        switch(request) {
-            // SAMSUNG STATES
-            case RIL_UNSOL_AM: return "RIL_UNSOL_AM";
-            default: return "<unknown response: "+request+">";
-        }
-    }
-    
-    protected void samsungUnsljLogRet(int response, Object ret) {
-        riljLog("[UNSL]< " + samsungResponseToString(response) + " " + retToString(response, ret));
-    }
-
-    private void setWbAmr(int state) {
-        if (state == 1) {
-            Rlog.d(RILJ_LOG_TAG, "setWbAmr(): setting audio parameter - wb_amr=on");
-            mAudioManager.setParameters("wb_amr=on");
-        }else if (state == 0) {
-            Rlog.d(RILJ_LOG_TAG, "setWbAmr(): setting audio parameter - wb_amr=off");
-            mAudioManager.setParameters("wb_amr=off");
-        }
-    }
-
 }
