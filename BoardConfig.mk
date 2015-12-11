@@ -164,6 +164,8 @@ TARGET_OTA_ASSERT_DEVICE			:= fortuna3g,fortunave3g,SM-G530H,SM-G530F,G530FZ,SM-
 TARGET_USE_VENDOR_CAMERA_EXT                    := true
 USE_DEVICE_SPECIFIC_CAMERA                      := true
 USE_CAMERA_STUB 				:= true
+TARGET_PROVIDES_CAMERA_HAL 			:= true
+
 
 # Releasetools
 TARGET_RELEASETOOLS_EXTENSIONS                  := $(LOCAL_PATH)
