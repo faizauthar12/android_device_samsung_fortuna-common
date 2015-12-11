@@ -204,6 +204,7 @@ BOARD_SEPOLICY_UNION += \
     mpdecision.te \
     thermald.te \
     ueventd.te \
+    rild.te\
     vold.te \
     file_contexts \
     genfs_contexts \
