@@ -177,6 +177,11 @@ PRODUCT_PACKAGES += \
     libqdutils \
     libqdMetaData \
     libtinyxml
+    
+# Camera
+PRODUCT_PACKAGES += \
+    libmm-qcamera \
+    camera.msm8916    
 
 # Filesystem
 PRODUCT_PACKAGES += \
