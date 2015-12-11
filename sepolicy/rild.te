@@ -5,7 +5,7 @@ allow rild self:netlink_route_socket { write };
 qmux_socket(rild)
 
 # Allow logging diagnostic items
-allow rild diagnostic_device:chr_file rw_file_perms;
+#allow rild diagnostic_device:chr_file rw_file_perms;
 
 # XXX label with own type?
 allow rild sysfs:file { read open write getattr };
