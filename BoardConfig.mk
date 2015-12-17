@@ -22,6 +22,11 @@ LOCAL_PATH 					:= device/samsung/fortunave3g
 # inherit from the proprietary version
 -include vendor/samsung/fortunave3g/BoardConfigVendor.mk
 
+# Qualcomm support
+BOARD_USES_QCOM_HARDWARE := true
+COMMON_GLOBAL_CFLAGS += -DQCOM_HARDWARE
+
+
 # Platform
 TARGET_BOARD_PLATFORM 				:= msm8916
 TARGET_BOOTLOADER_BOARD_NAME 			:= msm8916
@@ -29,7 +34,9 @@ TARGET_BOARD_PLATFORM_GPU 			:= qcom-adreno306
 TARGET_USE_QCOM_BIONIC_OPTIMIZATION 		:= true
 TARGET_USES_QCOM_BSP 				:= true
 COMMON_GLOBAL_CFLAGS 				+= -DQCOM_BSP
-HAVE_SYNAPTICS_I2C_RMI4_FW_UPGRADE 		:= true
+HAVE_SYNAPTICS_I2C_RMI4_FW_UPGRADE 	:= true
+BOARD_USES_QCOM_HARDWARE             := true
+COMMON_GLOBAL_CFLAGS                += -DQCOM_HARDWARE
 
 # Init
 TARGET_INIT_VENDOR_LIB				:= libinit_msm
