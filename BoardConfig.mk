@@ -189,10 +189,9 @@ EXTENDED_FONT_FOOTPRINT 			:= true
 # Lights
 TARGET_PROVIDES_LIBLIGHT 			:= true
 
-# Preload lib
-TARGET_LDPRELOAD 				:= libNimsWrap.so
-
 # SELinux
+include device/qcom/sepolicy/sepolicy.mk
+
 BOARD_SEPOLICY_DIRS += \
         device/samsung/fortunave3g/sepolicy
         
