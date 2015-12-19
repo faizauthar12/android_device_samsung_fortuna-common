@@ -118,6 +118,10 @@ TARGET_PLATFORM_DEVICE_BASE                     := /devices/soc.0/
 # Audio
 BOARD_USES_ALSA_AUDIO 				:= true
 TARGET_QCOM_AUDIO_VARIANT 			:= caf
+BOARD_HAVE_SAMSUNG_AUDIO                        := true
+BOARD_USES_FLUENCE_INCALL                       := true
+BOARD_USES_FLUENCE_FOR_VOIP                     := true
+BOARD_USES_SEPERATED_AUDIO_INPUT                := true
 
 # Display
 TARGET_QCOM_DISPLAY_VARIANT 			:= caf-k30t
