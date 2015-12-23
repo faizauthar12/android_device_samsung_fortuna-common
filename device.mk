@@ -221,8 +221,6 @@ PRODUCT_PACKAGES += \
     libstagefrighthw \
     qcmediaplayer
 
-PRODUCT_BOOT_JARS += qcmediaplayer	
-
 # For userdebug builds
 ADDITIONAL_DEFAULT_PROPERTIES += \
     ro.secure=0 \
