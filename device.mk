@@ -129,10 +129,10 @@ PRODUCT_PACKAGES += \
 	static_busybox	
 
 # Audio
-# audio_policy.msm8916
-# audio.primary.msm8916
-# audiod
 PRODUCT_PACKAGES += \
+	audiod \
+	audio.primary.msm8916 \
+	audio_policy.msm8916 \
     audio.a2dp.default \
     audio.r_submix.default \
     audio.usb.default \
@@ -181,9 +181,9 @@ PRODUCT_PACKAGES += \
     libtinyxml
     
 # Camera
-#PRODUCT_PACKAGES += \
-#    libmm-qcamera \
-#    camera.msm8916    
+PRODUCT_PACKAGES += \
+    libmm-qcamera \
+    camera.msm8916    
 
 # Filesystem
 PRODUCT_PACKAGES += \
