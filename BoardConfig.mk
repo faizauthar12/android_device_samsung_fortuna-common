@@ -122,7 +122,7 @@ BOARD_USES_SEPERATE_INPUT               := true
 BOARD_USES_SEPERATED_VOICE_SPEAKER      := true
 BOARD_USES_SEPERATED_VOICE_SPEAKER_MIC  := true
 TARGET_USES_QCOM_MM_AUDIO               := true
-
+USE_CUSTOM_AUDIO_POLICY                 := 1
 # Display
 TARGET_QCOM_DISPLAY_VARIANT 			:= caf-k30t
 TARGET_USES_ION                                 := true
