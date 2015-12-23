@@ -205,20 +205,24 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Keystore
 PRODUCT_PACKAGES += \
     keystore.msm8916
-
+	
+# Media
 PRODUCT_PACKAGES += \
     libc2dcolorconvert \
-    libdashplayer \
     libdivxdrmdecrypt \
-    libmm-omxcore \
+    libdashplayer \
     libOmxAacEnc \
     libOmxAmrEnc \
     libOmxCore \
     libOmxEvrcEnc \
     libOmxQcelp13Enc \
     libOmxVdec \
+    libOmxVdecHevc \
+    libOmxVenc \
     libstagefrighthw \
     qcmediaplayer
+
+PRODUCT_BOOT_JARS += qcmediaplayer	
 
 # For userdebug builds
 ADDITIONAL_DEFAULT_PROPERTIES += \
