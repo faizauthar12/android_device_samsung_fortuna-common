@@ -86,18 +86,18 @@ WLAN_MODULES:
 TARGET_KERNEL_MODULES += WLAN_MODULES
 
 # Wifi
-BOARD_HAS_QCOM_WLAN 			    := true
+BOARD_HAS_QCOM_WLAN 			        := true
 BOARD_HAS_QCOM_WLAN_SDK 			:= true
-BOARD_HOSTAPD_DRIVER 			    := NL80211
+BOARD_HOSTAPD_DRIVER 			        := NL80211
 BOARD_HOSTAPD_PRIVATE_LIB 			:= lib_driver_cmd_qcwcn
 BOARD_WLAN_DEVICE 			        := qcwcn
-BOARD_WPA_SUPPLICANT_DRIVER 	    := NL80211
-BOARD_WPA_SUPPLICANT_PRIVATE_LIB 	:= lib_driver_cmd_qcwcn
-WIFI_DRIVER_FW_PATH_AP 			    := "ap"
+BOARD_WPA_SUPPLICANT_DRIVER 	                := NL80211
+BOARD_WPA_SUPPLICANT_PRIVATE_LIB 	        := lib_driver_cmd_qcwcn
+WIFI_DRIVER_FW_PATH_AP 			        := "ap"
 WIFI_DRIVER_FW_PATH_STA 			:= "sta"
 TARGET_USES_QCOM_WCNSS_QMI 	 		:= true
 TARGET_USES_WCNSS_CTRL 		 		:= true 
-WPA_SUPPLICANT_VERSION 			    := VER_0_8_X
+WPA_SUPPLICANT_VERSION 			        := VER_0_8_X
 WIFI_DRIVER_MODULE_PATH 			:= "/system/lib/modules/wlan.ko"
 WIFI_DRIVER_MODULE_NAME 			:= "wlan"
 
@@ -116,13 +116,14 @@ BOARD_VOLD_MAX_PARTITIONS 			:= 28
 TARGET_PLATFORM_DEVICE_BASE                     := /devices/soc.0/
 
 # Audio
-BOARD_USES_ALSA_AUDIO 				    := true
-TARGET_QCOM_AUDIO_VARIANT 			    := caf
-BOARD_USES_SEPERATE_INPUT               := true
-BOARD_USES_SEPERATED_VOICE_SPEAKER      := true
-BOARD_USES_SEPERATED_VOICE_SPEAKER_MIC  := true
-TARGET_USES_QCOM_MM_AUDIO               := true
-USE_CUSTOM_AUDIO_POLICY                 := 1
+BOARD_USES_ALSA_AUDIO 				:= true
+TARGET_QCOM_AUDIO_VARIANT 			:= caf
+#BOARD_USES_SEPERATE_INPUT                      := true
+#BOARD_USES_SEPERATED_VOICE_SPEAKER             := true
+#BOARD_USES_SEPERATED_VOICE_SPEAKER_MIC         := tru
+TARGET_USES_QCOM_MM_AUDIO                       := true
+USE_CUSTOM_AUDIO_POLICY                         := 1
+
 # Display
 TARGET_QCOM_DISPLAY_VARIANT 			:= caf-k30t
 TARGET_USES_ION                                 := true
