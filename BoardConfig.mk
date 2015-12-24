@@ -59,7 +59,7 @@ TARGET_SYSTEM_PROP 				:= $(LOCAL_PATH)/system.prop
 TARGET_POWERHAL_VARIANT 			:= qcom
 
 # Media 
-TARGET_ENABLE_QC_AV_ENHANCEMENTS 		:= true
+TARGET_ENABLE_QC_AV_ENHANCEMENTS 	:= true
 TARGET_QCOM_MEDIA_VARIANT 			:= caf-k30t
 TARGET_HAVE_OMX_HEVC 				:= true
 
@@ -74,9 +74,9 @@ BOARD_RAMDISK_OFFSET     			:= 0x02000000
 TARGET_KERNEL_SOURCE 				:= kernel/samsung/fortuna
 BOARD_FLASH_BLOCK_SIZE 				:= 131072
 TARGET_KERNEL_CONFIG 				:= msm8916_sec_defconfig
-TARGET_KERNEL_SELINUX_CONFIG 			:= selinux_defconfig
+TARGET_KERNEL_SELINUX_CONFIG 		:= selinux_defconfig
 TARGET_KERNEL_TIMA_CONFIG 			:= tima8916_defconfig
-TARGET_KERNEL_VARIANT_CONFIG 			:= msm8916_sec_fortunave3g_eur_defconfig
+TARGET_KERNEL_VARIANT_CONFIG 		:= msm8916_sec_fortunave3g_eur_defconfig
 
 WLAN_MODULES:
 	mkdir -p $(KERNEL_MODULES_OUT)/pronto
@@ -113,20 +113,18 @@ BOARD_VOLD_EMMC_SHARES_DEV_MAJOR 		:= true
 BOARD_VOLD_DISC_HAS_MULTIPLE_MAJORS 		:= true
 BOARD_SUPPRESS_EMMC_WIPE 			:= true
 BOARD_VOLD_MAX_PARTITIONS 			:= 28
-TARGET_PLATFORM_DEVICE_BASE                     := /devices/soc.0/
+TARGET_PLATFORM_DEVICE_BASE         := /devices/soc.0/
 
 # Audio
-BOARD_USES_ALSA_AUDIO 				:= true
-TARGET_QCOM_AUDIO_VARIANT 			:= caf
-#BOARD_USES_SEPERATE_INPUT                      := true
-#BOARD_USES_SEPERATED_VOICE_SPEAKER             := true
-#BOARD_USES_SEPERATED_VOICE_SPEAKER_MIC         := tru
-TARGET_USES_QCOM_MM_AUDIO                       := true
-USE_CUSTOM_AUDIO_POLICY                         := 1
+BOARD_USES_ALSA_AUDIO 				 := true
+TARGET_QCOM_AUDIO_VARIANT 			 := caf
+AUDIO_FEATURE_DISABLED_DS1_DOLBY_DDP := true
 
 # Display
-TARGET_QCOM_DISPLAY_VARIANT 			:= caf-k30t
-TARGET_USES_ION                                 := true
+TARGET_QCOM_DISPLAY_VARIANT 		:= caf-new
+TARGET_HAVE_NEW_GRALLOC             := true
+TARGET_USES_POST_PROCESSING         := true
+TARGET_USES_ION                     := true
 TARGET_USES_NEW_ION_API 			:= true
 TARGET_HAVE_HDMI_OUT 				:= false
 TARGET_USES_OVERLAY 				:= true

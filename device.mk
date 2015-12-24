@@ -169,14 +169,18 @@ PRODUCT_PACKAGES += \
 	
 # Display
 PRODUCT_PACKAGES += \
-    copybit.msm8916 \
-    gralloc.msm8916 \
-    libmemalloc \
-    memtrack.msm8916 \
-    hwcomposer.msm8916 \
+	copybit.msm8916 \
+	libexternal \
+	gralloc.msm8916 \
+	hwcomposer.msm8916 \
+	lights.msm8916.so \
+	memtrack.msm8916 \
     liboverlay \
-    libgenlock \
     libqdutils \
+    libqservice \
+	libvirtual \
+	libmemalloc \
+    libgenlock \
     libqdMetaData \
     libtinyxml
     
