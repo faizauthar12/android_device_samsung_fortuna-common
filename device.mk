@@ -137,7 +137,6 @@ PRODUCT_PACKAGES += \
     audio.a2dp.default \
     audio.r_submix.default \
     audio.usb.default \
-	audio.primary.default \
     libaudio-resampler \
     libqcompostprocbundle \
     libqcomvisualizer \
@@ -146,7 +145,7 @@ PRODUCT_PACKAGES += \
 	tinyplay \
     tinycap \
     tinypcminfo
-	
+		
 # Charger
 PRODUCT_PACKAGES += \
     charger \
@@ -210,7 +209,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Keystore
 PRODUCT_PACKAGES += \
     keystore.msm8916
-	
+		
 # Media
 PRODUCT_PACKAGES += \
     libc2dcolorconvert \
@@ -220,6 +219,8 @@ PRODUCT_PACKAGES += \
     libOmxAacEnc \
     libOmxAmrEnc \
     libOmxCore \
+	libOmxVdecHevc \
+	libOmxVenc \
     libOmxEvrcEnc \
     libOmxQcelp13Enc \
     libOmxVdec \
