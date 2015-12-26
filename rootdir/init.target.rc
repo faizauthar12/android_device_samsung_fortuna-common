@@ -115,8 +115,8 @@ service time_daemon /system/bin/time_daemon
 
 service audiod /system/bin/audiod
    class late_start
-   user system
-   group system
+   user root
+   group root
 
 on charger-fs
    wait /dev/block/bootdevice/by-name/system

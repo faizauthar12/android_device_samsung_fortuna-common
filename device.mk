@@ -141,10 +141,7 @@ PRODUCT_PACKAGES += \
     libqcompostprocbundle \
     libqcomvisualizer \
     libqcomvoiceprocessing \
-    tinymix \
-	tinyplay \
-    tinycap \
-    tinypcminfo
+    tinymix
 		
 # Charger
 PRODUCT_PACKAGES += \
@@ -173,7 +170,6 @@ PRODUCT_PACKAGES += \
 	libexternal \
 	gralloc.msm8916 \
 	hwcomposer.msm8916 \
-	lights.msm8916.so \
 	memtrack.msm8916 \
     liboverlay \
     libqdutils \
@@ -186,7 +182,6 @@ PRODUCT_PACKAGES += \
     
 # Camera
 PRODUCT_PACKAGES += \
-    libmm-qcamera \
     camera.msm8916    
 
 # Filesystem
@@ -209,6 +204,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Keystore
 PRODUCT_PACKAGES += \
     keystore.msm8916
+	
+# Torch
+PRODUCT_PACKAGES += \
+    Torch	
 		
 # Media
 PRODUCT_PACKAGES += \
@@ -219,6 +218,8 @@ PRODUCT_PACKAGES += \
     libOmxAacEnc \
     libOmxAmrEnc \
     libOmxCore \
+	libOmxVdecHevc \
+	libOmxVenc \
     libOmxEvrcEnc \
     libOmxQcelp13Enc \
     libOmxVdec \
@@ -236,6 +237,7 @@ ADDITIONAL_DEFAULT_PROPERTIES += \
 
 # Wifi
 PRODUCT_PACKAGES += \
+	libcurl \
     libqsap_sdk \
     libQWiFiSoftApCfg \
     libwpa_client \
@@ -245,10 +247,20 @@ PRODUCT_PACKAGES += \
     wpa_supplicant.conf \
     libwcnss_qmi \
     wcnss_service
+	
+# Ebtables
+PRODUCT_PACKAGES += \
+    ebtables \
+    ethertypes \
+    libebtc	
 
 # RIL
 PRODUCT_PACKAGES += \
     libxml2
+	
+# GPS
+PRODUCT_PACKAGES += \
+    gps.msm8916	
 	
 # USB
 PRODUCT_PACKAGES += \

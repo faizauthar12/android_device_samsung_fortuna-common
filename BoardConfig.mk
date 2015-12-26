@@ -60,12 +60,12 @@ TARGET_POWERHAL_VARIANT 			:= qcom
 
 # Media 
 TARGET_ENABLE_QC_AV_ENHANCEMENTS 	:= true
-TARGET_QCOM_MEDIA_VARIANT 			:= caf-k30t
+TARGET_QCOM_MEDIA_VARIANT 			:= caf-new
 TARGET_HAVE_OMX_HEVC 				:= true
 
 # Kernel
 BOARD_CUSTOM_BOOTIMG_MK 			:= $(LOCAL_PATH)/mkbootimg.mk
-BOARD_KERNEL_BASE 				:= 0x80000000
+BOARD_KERNEL_BASE 				    := 0x80000000
 BOARD_KERNEL_CMDLINE 				:= console=null androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x3F ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci androidboot.selinux=permissive
 BOARD_KERNEL_PAGESIZE 				:= 2048
 BOARD_KERNEL_SEPARATED_DT 			:= true
@@ -118,10 +118,9 @@ TARGET_PLATFORM_DEVICE_BASE         := /devices/soc.0/
 # Audio
 BOARD_USES_ALSA_AUDIO 				 := true
 TARGET_QCOM_AUDIO_VARIANT 			 := caf
-AUDIO_FEATURE_DISABLED_DS1_DOLBY_DDP := true
 
 # Display
-TARGET_QCOM_DISPLAY_VARIANT 		:= caf-k30t
+TARGET_QCOM_DISPLAY_VARIANT 		:= caf-new
 TARGET_HAVE_NEW_GRALLOC             := true
 TARGET_USES_POST_PROCESSING         := true
 TARGET_USES_ION                     := true
@@ -163,9 +162,8 @@ PROTOBUF_SUPPORTED := true
 TARGET_OTA_ASSERT_DEVICE			:= fortuna3g,fortunave3g,SM-G530H,SM-G530F,G530FZ,SM-G530AZ
 
 # Camera
-COMMON_GLOBAL_CFLAGS += -DSAMSUNG_CAMERA_HARDWARE
-TARGET_PROVIDES_CAMERA_HAL := true
-USE_DEVICE_SPECIFIC_CAMERA := true
+TARGET_PROVIDES_CAMERA_HAL          := true
+USE_DEVICE_SPECIFIC_CAMERA          := true
 
 # Releasetools
 TARGET_RELEASETOOLS_EXTENSIONS                  := $(LOCAL_PATH)
