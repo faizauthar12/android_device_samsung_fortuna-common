@@ -120,7 +120,7 @@ BOARD_USES_ALSA_AUDIO 				 := true
 TARGET_QCOM_AUDIO_VARIANT 			 := caf
 
 # Display
-TARGET_QCOM_DISPLAY_VARIANT 		:= caf-new
+TARGET_QCOM_DISPLAY_VARIANT 		:= caf-k30t
 TARGET_USES_ION                     := true
 TARGET_USES_NEW_ION_API 			:= true
 TARGET_HAVE_HDMI_OUT 				:= false
