@@ -121,7 +121,6 @@ TARGET_QCOM_AUDIO_VARIANT 			 := caf
 
 # Display
 TARGET_QCOM_DISPLAY_VARIANT 		:= caf-new
-TARGET_HAVE_NEW_GRALLOC             := true
 TARGET_USES_POST_PROCESSING         := true
 TARGET_USES_ION                     := true
 TARGET_USES_NEW_ION_API 			:= true
