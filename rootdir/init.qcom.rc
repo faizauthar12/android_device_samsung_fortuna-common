@@ -784,14 +784,14 @@ service qmiproxy /system/bin/qmiproxy
     class main
     #user radio
     user root
-    group radio qcom_diag
+    group radio qcom_diag root
     disabled
 
 # QMUX must be in multiple groups to support external process connections
 service qmuxd /system/bin/qmuxd
     class main
     user root system
-    group radio audio bluetooth gps qcom_diag
+    group radio audio bluetooth gps qcom_diag root
     disabled
 
 service netmgrd /system/bin/netmgrd
