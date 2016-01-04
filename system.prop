@@ -1,5 +1,5 @@
 #
-# system.prop for grand prime
+# system.prop for msm8916
 #
 rild.libpath=/system/lib/libsec-ril.so
 rild.libargs=-d /dev/smd0

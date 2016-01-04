@@ -14,9 +14,9 @@
 
 LOCAL_PATH := $(call my-dir)
 
-#ifeq ($(TARGET_BOOTLOADER_BOARD_NAME),fortunave3g)
-#include $(call all-makefiles-under,$(LOCAL_PATH))
-ifeq ($(TARGET_DEVICE),fortunave3g)
+SAMSUNG_TARGETS := fortuna3g fortunave3g
+ 
+ifneq ($(filter $(SAMSUNG_TARGETS),$(TARGET_DEVICE)),)
 include $(all-subdir-makefiles)
 
 # CMNLIB

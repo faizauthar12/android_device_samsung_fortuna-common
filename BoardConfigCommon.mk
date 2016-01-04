@@ -14,7 +14,7 @@
 # limitations under the License.
 
 # BoardConfig.mk
-LOCAL_PATH 					:= device/samsung/fortunave3g
+LOCAL_PATH 					:= device/samsung/fortuna-common
 
 # Inherit from samsung qcom-common
 -include device/samsung/qcom-common/BoardConfigCommon.mk 
@@ -157,9 +157,6 @@ BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE 		:= ext4
 BOARD_RIL_CLASS 				:= ../../../$(LOCAL_PATH)/ril/
 PROTOBUF_SUPPORTED := true
 
-# OTA override
-TARGET_OTA_ASSERT_DEVICE			:= fortuna3g,fortunave3g,SM-G530H,SM-G530F,G530FZ,SM-G530AZ
-
 # Camera
 TARGET_PROVIDES_CAMERA_HAL          := true
 USE_DEVICE_SPECIFIC_CAMERA          := true
@@ -186,7 +183,7 @@ EXTENDED_FONT_FOOTPRINT 			:= true
 TARGET_PROVIDES_LIBLIGHT 			:= true
 
 BOARD_SEPOLICY_DIRS += \
-        device/samsung/fortunave3g/sepolicy
+        device/samsung/fortuna-common/sepolicy
         
 BOARD_SEPOLICY_UNION += \
     file.te \
