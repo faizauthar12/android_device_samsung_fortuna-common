@@ -270,7 +270,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=240
 
-$(call inherit-product-if-exists, vendor/samsung/fortunave3g/fortuna-common-vendor.mk)
+$(call inherit-product-if-exists, vendor/samsung/fortuna-common/fortuna-common-vendor.mk)
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
