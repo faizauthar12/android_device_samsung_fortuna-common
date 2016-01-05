@@ -20,7 +20,7 @@ LOCAL_PATH 					:= device/samsung/fortuna-common
 -include device/samsung/qcom-common/BoardConfigCommon.mk 
 
 # inherit from the proprietary version
--include vendor/samsung/fortunave3g/BoardConfigVendor.mk
+-include vendor/samsung/fortuna-common/BoardConfigVendor.mk
 
 # Platform
 TARGET_BOARD_PLATFORM 				:= msm8916
