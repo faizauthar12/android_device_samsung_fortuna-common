@@ -195,6 +195,7 @@ BOARD_SEPOLICY_UNION += \
     thermald.te \
     ueventd.te \
     rild.te\
+    wcnss_service.te \
     vold.te \
     file_contexts \
     genfs_contexts \
