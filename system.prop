@@ -61,10 +61,34 @@ ro.use_data_netmgrd=false
 # SELinux
 ro.boot.selinux=permissive
 
-persist.cne.feature=0
 persist.fuse_sdcard=true
 persist.radio.atfwd.start=false
 persist.hwc.enable_vds=1
 
 #Preload
 persist.sys.storage_preload=1
+
+#Util
+persist.hwc.mdpcomp.enable=true
+debug.mdpcomp.logs=0
+dalvik.vm.heapsize=36m
+dev.pm.dyn_samplingrate=1
+persist.demo.hdmirotationlock=false
+debug.enable.sglscale=1
+persist.cne.feature=1
+persist.dpm.feature=3
+media.stagefright.enable-player=true
+media.stagefright.enable-http=true
+media.stagefright.enable-aac=true
+media.stagefright.enable-qcp=true
+media.stagefright.enable-fma2dp=true
+media.stagefright.enable-scan=true
+media.msm8939hw=0
+media.msm8929hw=0
+mm.enable.smoothstreaming=true
+mmp.enable.3g2=true
+media.aac_51_output_enabled=true
+mm.enable.qcom_parser=3407871
+media.stagefright.use-awesome=false
+ro.use_data_netmgrd=true
+persist.data.netmgrd.qos.enable=true
